@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<!-- jsPsych library -->
+	<base target="_top">
+	<!-- jsPsych library -->
+	<script src="https://BrianOdegaard.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
+	<script src="https://BrianOdegaard.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+	<script src="https://BrianOdegaard.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
+	<script src="https://BrianOdegaard.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
+	<link rel="stylesheet" href="https://BrianOdegaard.github.io/jsPsychSheet/jspsych/css/jspsych.css">
+	
+	<!-- jsPsychSheet library -->
+    	<base target="_top">
+    	<script src="https://BrianOdegaard.github.io/jsPsychSheet/jspsychsheet.js"></script>
+    	<link rel="stylesheet" href="https://BrianOdegaard.github.io/jsPsychSheet/jspsychsheet.css">
+    </head>
+    <body></body>
+    <script>
+
+	// generate a random subject ID with 15 characters
+	var subject_id = jsPsych.randomization.randomID(6);
+	
+	// record the condition assignment in the jsPsych data
+	// this adds a property called 'subject' and a property called 'condition' to every trial
+	jsPsych.data.addProperties({
+  		subject: subject_id,
+	});
+	    
+	/* create timeline */
+	var timeline = [];
+
+	/* define welcome message trial */	
+	var welcome = {
+  		type: "html-keyboard-response",
+  		stimulus: "Welcome to the experiment. Press any key to begin."
+	};
+	timeline.push(welcome);
+    
+    
+    /* Present a randomized order of all of the videos/trials you wish to show */
+    /* Make sure the answer choices are contingent on the video */
+    /* The answer choices are mainly from Table 1 in Stropahl et al., 2017 */
+    /* We'll have to decide which options to give for the ones that aren't from that table */
+    /* To learn more, check out https://www.jspsych.org/overview/timeline/#timeline-variables */
+    
+	var mcGurkProcedure = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ta','Pa','Da'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Na','La'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			
+		],
+		randomize_order: true,
+    	repetitions: 1
+	}
+	timeline.push(mcGurkProcedure);
+	
+
+	/* start the experiment */
+	jsPsych.init({
+  		timeline: timeline,
+  		show_progress_bar: true,
+  		on_finish: function() {
+      			jsPsychSheet.uploadData(jsPsych.data.get().csv());
+  		}
+	});
+
+    </script>
+</html>
