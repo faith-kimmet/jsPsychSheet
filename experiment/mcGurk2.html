@@ -5,6 +5,7 @@
 	<base target="_top">
 	<!-- jsPsych library -->
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
+    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-survey-text.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
@@ -36,6 +37,15 @@
   		stimulus: "Welcome to the experiment. Press any key to begin."
 	};
 	timeline.push(welcome);
+    
+    /* collect participant data - age */
+    var survey = {
+      type: "survey-text",
+      questions: [
+        {prompt: "How old are you?", required: true, name: "Age"}
+       ]
+    };
+    timeline.push(survey);
     
     
     /* Present a randomized order of all of the videos/trials you wish to show */
