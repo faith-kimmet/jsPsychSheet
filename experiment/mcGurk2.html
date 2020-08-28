@@ -54,10 +54,25 @@
     var gender = {
       type: "survey-multi-choice",
       questions: [
-        {prompt:"Which gender do you identify as?", name: "Gender", options: gender_options}
+        {prompt:"Which gender do you identify as?", name: "Gender", options: gender_options, required:true}
       ]
      };
      timeline.push(gender);
+     
+     /* define experiment insructions */ 
+     var instructions = {
+       type: "html-keyboard-response",
+       stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
+       "Please read the instructions below before begining.</p>" +
+       "<p>Each trial consists of three parts. In the first part, a woman will pronounce a sound <strong>one time</strong>. " +
+       "During the second part, you will be given four options to identify which syllable you perceived. " +
+       "Lastly, you will be asked to rate how confident you were in your selection on a scale of 0 to 100" +
+       " (0 being <strong>not confident</strong> and 100 being <strong>fully confident</strong>). " +
+       "The trials will then be repeated until the conclusion of the experiment. </p>"+
+       "<p>Press any key to begin.</p>",
+     };
+     timeline.push(instructions);
+       
     
     
     /* Present a randomized order of all of the videos/trials you wish to show */
