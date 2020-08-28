@@ -6,6 +6,7 @@
 	<!-- jsPsych library -->
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
     <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-survey-text.js"></script>
+    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-survey-multi-choice.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
@@ -46,6 +47,17 @@
        ]
     };
     timeline.push(survey);
+    
+    /* collect participant data - gender */
+    var gender_options = ["Man", "Woman", "Nonbinary", "Choose not to answer"];
+    
+    var gender = {
+      type: "survey-multi-choice",
+      questions: [
+        {prompt:"Which gender do you identify as?", name: "Gender", options: gender_options}
+      ]
+     };
+     timeline.push(gender);
     
     
     /* Present a randomized order of all of the videos/trials you wish to show */
