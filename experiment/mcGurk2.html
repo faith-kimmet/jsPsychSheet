@@ -18,103 +18,7 @@
     	<script src="https://sampedersen.github.io/jsPsychSheet/jspsychsheet.js"></script>
     	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsychsheet.css">
     </head>
-    <body>
-	<div id="container consent">
-		<div id="consent">
-			<h1>We need your consent to proceed!<br>
-		<hr>
-                <div class="legal well">
-                    <p>
-                    Thank you for your interest in this study!  If you so choose, you will be participating in a study 
-					conducted by principal investigator Dr. Brian Odegaard (UCLA) and faculty sponsor Dr. Hakwan Lau (UCLA).  
-					The purpose of this study is to investigate how effectively you can (1) direct your attention, and 
-					(2) report things you have seen.
-                    </p>
-                    <p>
-					This experiment displays images at various locations in your browser window.  Before we describe
-					the task and instructions below, please note the following four items:<br><br>
-					<b>1.) PLEASE USE GOOGLE CHROME AS YOUR WEB BROWSER IN THIS EXPERIMENT<br></b>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Safari, Firefox, Internet Explorer, and other browsers will not work.<br><br>
-					<b>2.) Please resize this browser window NOW so that it fills your entire screen!</b><br><br>
-					<b>3.) Please do NOT adjust your browser size after starting the experiment, as this can disrupt 
-					proper presentation of the stimuli!</b><br><br>
-					<b>4.) Finally, please note that it may take the experiment a few seconds to load!</b><br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You do not need to refresh the page after clicking the 
-					button to begin; the screen will change and the experiment will start after a few seconds.
-	                </p>
-					<p>
-					<b>Task:</b><br>
-						If you elect to participate in this study, you will be asked to do the following task: on every trial,
-					many images in different locations will be shown.  Following the presentation of the images, you
-					will be asked to judge various attributes of the images, and rate your confidence in your answers.
-					</p>
-					<p>
-					The entire study should last about one hour, with break screens that pop up about every
-					9 or 10 minutes.  It is important that you complete the study while in a quiet place where
-					you can focus without distraction.  Please be sure that you have enough time and are in
-					an appropriate setting before continuing with the study.
-					</p>
-	                <p>
-					As with any task requiring that you focus intently on the computer monitor, you may experience
-					some eye fatigue or dryness.  You will be given many opportunities to rest and look away from
-					the monitor during break screens.
-					</p>
-					<p>
-					<b>Eligibility:</b><br>
-					In order to participate, you must be using a computer (this should not be done on a mobile device
-					or iPad), be using Google Chrome as your web browser (Safari, Firefox, Internet Explorer, etc.
-					will not work), and must have normal or corrected-to-normal vision (glasses or contacts are 
-					OK!  Just make sure you are wearing them when you participate in this study).  Please DO NOT
-					participate if you have a history of seizures, epilepsy, or stroke, as the stimuli we present 
-					in the experiment will be briefly flashed, and this is a potential (but unlikely) seizure
-					trigger.  Finally, if you have previously participated in an experiment about judging images
-					that looks similar to this one, we would appreciate it if you abstained from participating, 
-					as we would like to evaluate participants that have never done this task before.
-					</p>
-					<p>
-					<b>Compensation:</b><br>
-					You will be compensated $4 for completion of the study, with the possibility of receiving a $1
-					bonus if your performance is higher than that of the previous participant.  Thus, if you 
-					complete the study and earn the bonus payment, you will receive $5 for your participation.<br><br>
-					<b>You may choose to withdraw from the experiment at any point, and we also reserve the right
-					to terminate your session at any time.  Should you choose to withdraw (or should your session be
-					terminated), you will be paid for the total amount of time you participated at a rate of $4/hr.  For 
-					example, if you participated for 15 minutes and then stopped, you would be paid $1 for participating.
-					Note, however, that if you withdraw, or if your session is terminated, you will not be eligible 
-					for the possible bonus payment. Additionally, you will need to email summarycomputations@gmail.com, 
-					notifying the experimenters of when you participated (please include day and time in the email), 
-					so you can be manually compensated through the mTurk system.</b>  We will not pay beyond 70 minutes of 
-					participation, as this experiment should be completed in about 60 minutes.<br><br>
-					You will not directly benefit from your participation in the research study, other than 
-					contributing to psychological research.
-					</p>
-					<p>
-					<b>Privacy and Confidentiality:</b><br>
-					Any information that is obtained in connection with this study and that can identify you will 
-					remain confidential.  It will be disclosed only with your permission or as required by law.
-					Any work performed on mTurk can be linked to your profile page.  You may therefore wish to 
-					restrict what information you share in your public profile.  If you choose to contact us directly
-					either at the email address below or through mTurk, your email name may be seen.
-					mTurk worker IDs will not be shared with anyone.  mTurk worker IDs are collected solely for
-					the purposes of distributing compensation and will not be connected with the data or shared
-					with anyone outside of the research team.  
-					</p>
-					<p>
-					<b>Questions/Concerns?</b><br>	
-					If you have any questions about the study, please contact the study manager at 
-					summary.computations@gmail.com.
-					If you wish to ask questions about your rights as a research participant or if you wish to voice 
-					any problems or concerns you may have about the study to someone other than the 
-					researchers, please call the Office of the Human Research Protection Program at (310) 825-7122
-					or write to Office of the Human Research Protection Program, UCLA, 11000 Kinross Avenue,
-					Suite 102, Box 951694, Los Angeles, CA 90095-1694.	
-                    </p>
-		<p><input type="checkbox" id="consent_checkbox" />I agree to take part in this study.</p>
-<button type="button" id="start" class='jspsych-btn'>Start Experiment</button>
-				</div>
-			</div>
-		</div>
-	</body>
+    <body>	</body>
     <script>
 
 	// generate a random subject ID with 15 characters
@@ -136,6 +40,7 @@
 	};
 	timeline.push(welcome);
     
+    
     /* collect participant data - age */
     var survey = {
       type: "survey-text",
@@ -145,32 +50,91 @@
     };
     timeline.push(survey);
     
-    /* collect participant data - gender */
-    var gender_options = ["Man", "Woman", "Nonbinary", "Choose not to answer"];
+    /* collect participant data - sex */
+    var sex_options = ["Male", "Female", "Intersex", "Choose not to answer"];
     
-    var gender = {
+    var sex = {
       type: "survey-multi-choice",
       questions: [
-        {prompt:"Which gender do you identify as?", name: "Gender", options: gender_options, required:true}
+        {prompt:"Which sex do you identify as?", name: "Sex", options: sex_options, required:true}
       ]
      };
-     timeline.push(gender);
-     
-     /* define experiment insructions */ 
+     timeline.push(sex);
+    
+    /* define experiment instructions */ 
      var instructions = {
        type: "html-keyboard-response",
        stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
        "Please read the instructions below before begining.</p>" +
-       "<p>Each trial consists of three parts. In the first part, a woman will pronounce a sound <strong>one time</strong>. " +
-       "During the second part, you will be given four options to identify which syllable you perceived. " +
-       "Lastly, you will be asked to rate how confident you were in your selection on a scale of 0 to 100" +
-       " (0 being <strong>not confident</strong> and 100 being <strong>fully confident</strong>). " +
-       "The trials will then be repeated until the conclusion of the experiment. </p>"+
-       "<p>Press any key to begin.</p>",
+       "<p>This experiment consists of three part, each part having multiple trials.</p> " +
+       "<p>During the first part, you will watch a video of a woman as she pronounces a syllable."+
+       "After viewing the video, you will identify which syllable she pronounced - four options will be provided. " +
+       "You will then be asked to rate how confident you were in your selection on a scale of 0 to 100" +
+       " (0 being <strong>not confident</strong> and 100 being <strong>fully confident</strong>).</p> " +
+       "<p>During the second phase of the experiment, you will watch a series of videos.</p>"+
+       "<p> In the third and final phase, you will again watch a video, select the response indicating which syllable was said,"+
+       " and then rank the confidence of your answer. After which, the experiment will be completed.</p>"+
+       "<p> *compensation instructions* </p>" +
+       "<p>We will start with a practice run. Your responses will not be incorporated into the experiment.</p>"+
+       "<p> Press any key to begin the practicing.</p>",
      };
      timeline.push(instructions);
        
     
+    
+    
+    var practice_trial = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+		],
+		randomize_order: true,
+    	repetitions: 0
+	}
+	timeline.push(practice_trial);
+    
+    /* prep for experiment trials */ 
+     var pretest = {
+       type: "html-keyboard-response",
+       stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. " + 
+       "Your responses will now be recorded. </p>" +
+       "<p>Press any key to begin.</p>",
+     };
+     timeline.push(pretest);
     
     /* Present a randomized order of all of the videos/trials you wish to show */
     /* Make sure the answer choices are contingent on the video */
@@ -178,7 +142,8 @@
     /* We'll have to decide which options to give for the ones that aren't from that table */
     /* To learn more, check out https://www.jspsych.org/overview/timeline/#timeline-variables */
     
-	var mcGurkProcedure = {
+    /*define pre-exposure condition */
+	var pre_exposure = {
 		timeline: [
 			{
 				type: 'video-button-response',
@@ -235,9 +200,130 @@
 			
 		],
 		randomize_order: true,
-    	repetitions: 1
+    	repetitions: 0
 	}
-	timeline.push(mcGurkProcedure);
+	timeline.push(pre_exposure);
+    
+     /* prep for exposure trial */ 
+     var exposure_prep = {
+       type: "html-keyboard-response",
+       stimulus: "<p>This concludes the first part of the experiment. In this next part, you will be watching videos. </p>" +
+       "<p>Press any key to begin the second part.</p>",
+     };
+     timeline.push(exposure_prep);
+	
+    /* define exposure condition */
+var exposure = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			
+		],
+		timeline_variables: [
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4']},
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4']},
+		],
+		randomize_order: true,
+    	repetitions: 0
+	}
+	timeline.push(exposure);
+    
+    /* prep for post-exposure trial */ 
+     var postexposure_prep = {
+       type: "html-keyboard-response",
+       stimulus: "<p>This concludes the second part of the experiment.</p>" +
+       " In this next part, you will be watching videos, selecting which response was said, and ranking the confidence of your response." +
+       " A 0 on the scale represents <strong>no confidence</strong>, while a 100 represents <strong>full confidence</strong>."+
+       "<p>Press any key to begin the third part.</p>",
+     };
+     timeline.push(postexposure_prep);
+	    
+   /* define post-exposure condition */     
+var post_exposure = {
+		timeline: [
+			{
+				type: 'video-button-response',
+				sources: jsPsych.timelineVariable('video'),
+				width: 800,
+				choices: [],
+				data: jsPsych.timelineVariable('video'), /* Store the video name */
+				trial_ends_after_video: true,
+				prompt: '<p></p>'
+				
+			},
+			{
+				type: 'video-button-response',
+				sources: [],
+				width: 800,
+				choices: jsPsych.timelineVariable('syllables'),
+				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+				prompt: '<p>Which syllable did you perceive?</p>'
+				
+			},
+			{
+				type: 'html-slider-response',
+				stimulus: '<p>How confident are you in your answer?</p>',
+				labels: ['0','25','50','75','100'],
+				min: 0,
+				max: 100,
+				start: function(){
+					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+					},
+				step: 1,
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+			}
+		],
+		timeline_variables: [
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ta','Pa','Da'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Na','La'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
+			
+		],
+		randomize_order: true,
+    	repetitions: 0
+	}
+	timeline.push(post_exposure);
 	
 
 	/* start the experiment */
