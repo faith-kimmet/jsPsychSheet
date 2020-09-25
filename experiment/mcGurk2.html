@@ -82,28 +82,75 @@
      };
      timeline.push(sex);
     
-    /* define experiment instructions */ 
-     var instructions = {
+    /* instructions pg 1  */ 
+     var instructions_p1 = {
        type: "html-keyboard-response",
        stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
-       "Please read the instructions below before begining.</p>" +
-       "<p>This experiment consists of three part, each part having multiple trials.</p> " +
-       "<p>During the first part, you will watch a video of a woman as she pronounces a syllable."+
-       "After viewing the video, you will identify which syllable she pronounced - four options will be provided. " +
-       "You will then be asked to rate how confident you were in your selection on a scale of 0 to 100" +
-       " (0 being <strong>not confident</strong> and 100 being <strong>fully confident</strong>).</p> " +
-       "<p>During the second phase of the experiment, you will watch a series of videos.</p>"+
-       "<p> In the third and final phase, you will again watch a video, select the response indicating which syllable was said,"+
-       " and then rank the confidence of your answer. After which, the experiment will be completed.</p>"+
-       "<p> *compensation instructions* </p>" +
-       "<p>We will start with a practice run. Your responses will not be incorporated into the experiment.</p>"+
-       "<p> Press any key to begin the practicing.</p>",
-     };
-     timeline.push(instructions);
+       "Please read the instructions entirely before beginning the experiment.</p>" +
+       "<p> Press any key to continue.</p>",
+      };
+      timeline.push(instructions_p1);
+     
+    /* instructions pg 2 */
+      var instructions_p2 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>This experiment consists of three parts, each part having multiple trials.</p>" +
+        "<p>During the first part, you will be watching videos and providing responses. The videos consist of a woman pronouncing syllables.</p>" +
+        "<p>The video will play <strong>once.</strong></p>"+
+        "<p>Press any key to continue.</p>",
+        };
+      timeline.push(instructions_p2);
+        
+        
+    /* instructions pg 3 */
+      var instructions_p3 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>After watching the video, you will be asked to select a syllable that matches the syllable from the video.</p>"+
+        "<p> After providing a response, you will be asked to rank your confidence in your selection on a scale of 0 to 100.</p>"+
+        "<p>0 means <strong>not confident</strong> and 100 means <strong>fully confident</strong>.</p>"+
+       "<p> Press any key to continue.</p>",
+        };
+      timeline.push(instructions_p3);
+      
+    /* instructions pg 4 */
+      var instructions_p4 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>During the second phase of the experiment, you will be presented with a series of videos.</p>" +
+        "<p>Please be sure to maintain your position and attention for this part of the experiment.</p>" +
+        "<p> Press any key to continue.</p>",
+        };
+      timeline.push(instructions_p4);
+      
+    /* instructions pg 5 */
+      var instructions_p5 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>In the third and final phase of the experiment, you will once again watch the videos once,</p>" +
+        "<p>select the matching syllable, and rate the confidence of your response.</p>" +
+        "<p>Once this phase has concluded, please wait for your responses to be recorded.</p>" + 
+        "<p>You will see a confirmation on your screen once your responses have finished loading.</p>" +
+        "<p>Once your responses have been collected, your compensation will be distributed ________</p>"+
+        "<p> Press any key to continue.</p>",
+        };
+      timeline.push(instructions_p5);
+
+    /* instructions pg 6 */
+      var instructions_p6 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>Please sit at an arm's distance length from your computer screen. See the example image below.</p>" +
+        "<p> Once you have done so, press any key to continue.</p>",
+        };
+      timeline.push(instructions_p6);
        
+    /* instructions pg 7 */
+      var instructions_p7 = {
+        type: "html-keyboard-response",
+        stimulus: "<p>Before the experiment begins, we will conduct some practice trials.</p>"+
+        "<p>These trials are only for practice and your responses will not be recorded.</p>"+
+        "<p> Press any key to begin the practice trials.</p>",
+        };
+      timeline.push(instructions_p7);
     
-    
-    
+    /* define practice trial */
     var practice_trial = {
 		timeline: [
 			{
@@ -152,19 +199,14 @@
     /* prep for experiment trials */ 
      var pretest = {
        type: "html-keyboard-response",
-       stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. " + 
-       "Your responses will now be recorded. </p>" +
-       "<p>Press any key to begin.</p>",
+       stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment.</p> " + 
+       "<p>Please be sure that you are seated arm's distance from your screen. Your responses will now be recorded. </p>" +
+       "<p>Press any key to begin the experiment.</p>",
      };
      timeline.push(pretest);
     
-    /* Present a randomized order of all of the videos/trials you wish to show */
-    /* Make sure the answer choices are contingent on the video */
-    /* The answer choices are mainly from Table 1 in Stropahl et al., 2017 */
-    /* We'll have to decide which options to give for the ones that aren't from that table */
-    /* To learn more, check out https://www.jspsych.org/overview/timeline/#timeline-variables */
     
-    /*define pre-exposure condition */
+    /*define pre-exposure */
 	var pre_exposure = {
 		timeline: [
 			{
@@ -201,27 +243,17 @@
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ta','Pa','Da'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Na','La'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			
-		],
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },			
+		
+        ],
 		randomize_order: true,
     	repetitions: 0
 	}
@@ -279,9 +311,9 @@ var exposure = {
     /* prep for post-exposure trial */ 
      var postexposure_prep = {
        type: "html-keyboard-response",
-       stimulus: "<p>This concludes the second part of the experiment.</p>" +
-       " In this next part, you will be watching videos, selecting which response was said, and ranking the confidence of your response." +
-       " A 0 on the scale represents <strong>no confidence</strong>, while a 100 represents <strong>full confidence</strong>."+
+       stimulus: "<p>This concludes the second part of the experiment. You will now begin the last phase</p>" +
+       " Remember, you will be watching videos of a syllable being pronounced. You will then be selecting which response was said and ranking the confidence of your response.</p>" +
+       " <p>A 0 on the scale represents <strong>not confidence</strong>, while a 100 represents <strong>fully confidence</strong>."+
        "<p>Press any key to begin the third part.</p>",
      };
      timeline.push(postexposure_prep);
@@ -323,27 +355,17 @@ var post_exposure = {
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Na','Ga','Da'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ta','Pa','Da'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ta','Na','La'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4'], syllables: ['Still need to decide what these choices should be'] },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ta','Da','Ka'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			
-		],
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Na','Ka','Ta'],1) },			
+		
+        ],
 		randomize_order: true,
     	repetitions: 0
 	}
