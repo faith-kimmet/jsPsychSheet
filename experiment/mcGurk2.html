@@ -72,7 +72,7 @@
     timeline.push(survey);
     
     /* collect participant data - sex */
-    var sex_options = ["Male", "Female", "Intersex", "Choose not to answer"];
+    var sex_options = ["Male", "Female", "Intersex"];
     
     var sex = {
       type: "survey-multi-choice",
@@ -135,7 +135,8 @@
 					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
 					},
 				step: 1,
-				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
+               require_movement:true
 			}
 		],
 		timeline_variables: [
@@ -195,7 +196,8 @@
 					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
 					},
 				step: 1,
-				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
+               require_movement:true
 			}
 		],
 		timeline_variables: [
@@ -316,7 +318,8 @@ var post_exposure = {
 					return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
 					},
 				step: 1,
-				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>"
+				prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
+               require_movement:true
 			}
 		],
 		timeline_variables: [
