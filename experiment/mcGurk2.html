@@ -73,12 +73,19 @@
     timeline.push(trial);
     
     /* browser check */
-    var browser = {
-        type: "html-keyboard-response",
-  		stimulus: "<p><strong> Please complete this experiment while using Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. <strong>Compensation cannot be gauranteed if responses are not recorded due to browser issues. </strong></p>" +
-        "<p>Press any key to continue.</p>",
-    };
-    timeline.push(browser);
+         var browser_wait = {
+           type: "html-keyboard-response",
+           stimulus: "<p>Please complete this experiment while using <strong>Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. <strong>Compensation cannot be gauranteed if responses are not properly recorded due to browser issues. </strong></p>",
+           choices: jsPsych.NO_KEYS,
+           trial_duration: 15000,
+          };
+      
+         var browser_go = {
+           type: "html-keyboard-response",
+           stimulus: "<p>Please complete this experiment while using <strong>Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. <strong>Compensation cannot be gauranteed if responses are not properly recorded due to browser issues. </strong></p>" +
+           "<p>Press any key to continue.</p>",
+          };
+          timeline.push(browser_wait, browser_go);
   
     /* collect participant data - age */
     var survey = {
@@ -108,13 +115,21 @@
     timeline.push(fullscreen);
      
     /* instructions pg 1  */ 
-     var instructions_p1 = {
-       type: "html-keyboard-response",
-       stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
-       "Please read the instructions entirely before beginning the experiment.</p>" +
-       "<p> Press any key to continue.</p>",
-      };
-      timeline.push(instructions_p1);
+         var instructions_p1wait = {
+           type: "html-keyboard-response",
+           stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
+           "Please read the instructions entirely before beginning the experiment.</p>",
+           choices: jsPsych.NO_KEYS,
+           trial_duration: 15000,
+          };
+      
+         var instructions_p1go = {
+           type:"html-keyboard-response",
+           stimulus: "<p>Thank you for choosing to participate in this experiment. " + 
+           "Please read the instructions entirely before beginning the experiment.</p>"+
+           "<p>Press any key to continue.</p>",
+          };
+          timeline.push(instructions_p1wait, instructions_p1go);
       
       /* sound check */   
       var sound_instructions = {
