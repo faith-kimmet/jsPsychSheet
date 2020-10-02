@@ -11,8 +11,15 @@
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
+    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
 	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/jspsych.css">
-	
+      <style>
+        img {
+          width: 650px,
+          height: 427px;
+        }
+       </style>
+    
 	<!-- jsPsychSheet library -->
     	<base target="_top">
     	<script src="https://sampedersen.github.io/jsPsychSheet/jspsychsheet.js"></script>
@@ -136,8 +143,9 @@
     /* instructions pg 6 
     Need to insert instruction image*/
       var instructions_p6 = {
-        type: "html-keyboard-response",
-        stimulus: "<p>Please sit at an arm's distance length from your computer screen. See the example image where?.</p>" +
+        type: "image-keyboard-response",
+        stimulus: "https://sampedersen.github.io/jsPsychSheet/images/arm.png",
+        prompt: "<p>Throughout the experiment, please sit at an arm's distance from your computer screen, as illustrated above." +
         "<p> Once you have done so, press any key to continue.</p>",
         };  
       timeline.push(instructions_p6);
