@@ -13,6 +13,7 @@
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
     <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-fullscreen.js"></script>
+    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
 	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/jspsych.css">
     <link href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/format.css"rel="stylesheet"type="text/css">
       <style>
@@ -106,7 +107,6 @@
     };
     timeline.push(fullscreen);
      
-    
     /* instructions pg 1  */ 
      var instructions_p1 = {
        type: "html-keyboard-response",
@@ -115,6 +115,33 @@
        "<p> Press any key to continue.</p>",
       };
       timeline.push(instructions_p1);
+      
+      /* sound check */   
+      var sound_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<p>For the duration of the experiment, please plug in headphones or turn on your speakers to a comfortable volume. Please use the following screen as an opportunity to check your audio settings as necessary.</p>" +
+        "<p>Press any key to continue.</p>",
+     };
+       timeline.push(sound_instructions);
+       
+       var pre_if_trial = {
+      type: 'video-keyboard-response',
+      sources: ['https://crubiera.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'],
+      width: 800,
+  		prompt: '<p>Press any key to repeat the video. Please adjust your volume appropriately. Press C when ready to continue.</p>'
+  	}
+
+    var loop_node = {
+      timeline: [pre_if_trial],
+      loop_function: function(data){
+          if(jsPsych.pluginAPI.convertKeyCharacterToKeyCode('c') == data.values()[0].key_press){
+              return false;
+          } else {
+            return true;
+          }
+      }
+  	};
+      timeline.push(pre_if_trial, loop_node);
      
     /* instructions pg 2 */
       var instructions_p2 = {
@@ -397,6 +424,14 @@ var post_exposure = {
     	repetitions: 0
 	}
 	timeline.push(post_exposure);
+    
+    /* closing page */
+      var end = {
+        type: "html-keyboard-response",
+        stimulus: "<p>This now concludes the experiment. Once your results have uploaded, you may close the window. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> Compensation cannot be gauranteed for incomplete participation.</p>"+
+       "<p> Press any key to continue.</p>",
+        };
+      timeline.push(end);
     
     /* exit fullscreen mode */ 
     var fullscreen_exit = {
