@@ -12,7 +12,9 @@
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
 	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
     <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-fullscreen.js"></script>
 	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/jspsych.css">
+    <link href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/format.css"rel="stylesheet"type="text/css">
       <style>
         img {
           width: 650px,
@@ -96,6 +98,14 @@
         ]
      };
      timeline.push(sex);
+     
+     /* fullscreen mode */ 
+    var fullscreen = {
+      type: "fullscreen",
+      fullscreen_mode:true,
+    };
+    timeline.push(fullscreen);
+     
     
     /* instructions pg 1  */ 
      var instructions_p1 = {
@@ -387,6 +397,13 @@ var post_exposure = {
     	repetitions: 0
 	}
 	timeline.push(post_exposure);
+    
+    /* exit fullscreen mode */ 
+    var fullscreen_exit = {
+      type: "fullscreen",
+      fullscreen_mode:false
+    };
+    timeline.push(fullscreen_exit);
 	
 
 	/* start the experiment */
