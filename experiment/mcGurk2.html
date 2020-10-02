@@ -68,6 +68,14 @@
         check_fn: check_consent
     };
     timeline.push(trial);
+    
+    /* browser check */
+    var browser = {
+        type: "html-keyboard-response",
+  		stimulus: "<p><strong> Please complete this experiment while using Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. <strong>Compensation cannot be gauranteed if responses are not recorded due to browser issues. </strong></p>" +
+        "<p>Press any key to continue.</p>",
+    };
+    timeline.push(browser);
   
     /* collect participant data - age */
     var survey = {
