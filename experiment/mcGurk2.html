@@ -77,7 +77,7 @@
            type: "html-keyboard-response",
            stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
            "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. "+ 
-           "<strong>Compensation cannot be gauranteed if responses are not properly recorded due to browser issues. </strong></p>",
+           "<strong>Compensation cannot be guaranteed if responses are not properly recorded due to browser issues. </strong></p>",
            choices: jsPsych.NO_KEYS,
            trial_duration: 7500,
           };
@@ -86,7 +86,7 @@
            type: "html-keyboard-response",
            stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
            "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. "+ 
-           "<strong>Compensation cannot be gauranteed if responses are not properly recorded due to browser issues. </strong></p>" +
+           "<strong>Compensation cannot be guaranteed if responses are not properly recorded due to browser issues. </strong></p>" +
            "<p>Press any key to continue.</p>",
           };
           timeline.push(browser_wait, browser_go);
@@ -156,7 +156,7 @@
       type: 'video-keyboard-response',
       sources: ['https://crubiera.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'],
       width: 800,
-  		prompt: '<p>Use this screen to test your sound settings and volume. Press any key to repeat the video. When you are ready to continue, press C.</p>'
+  		prompt: '<p>Press any key to repeat the video and adjust your volume as necessary. When you are ready to continue, press C.</p>'
   	}
 
     var loop_node = {
@@ -177,7 +177,7 @@
             type: "image-keyboard-response",
             stimulus: "https://sampedersen.github.io/jsPsychSheet/images/arm.png",
             prompt: "<p>This experiment consists of three parts, each part having multiple trials.</p>"+ 
-            "<p>Throughout the entirity of the experiment, please sit at an arm's distance from your computer screen, as illustrated above. "+ 
+            "<p>Throughout the entirety of the experiment, please sit at an arm's distance from your computer screen, as illustrated above. "+ 
             "Your attention should also be focused on the center of your screen.</p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
@@ -238,7 +238,7 @@
             stimulus: "<p>During the second part of the experiment, you will be presented with a series of videos. " +
             "Please be sure to maintain your position and attention for this part of the experiment.</p>",
             choices: jsPsych.NO_KEYS,
-            trial_duration: 500,
+            trial_duration: 5000,
             };
            var instructions_p5go = {
             type: "html-keyboard-response",
@@ -270,17 +270,17 @@
           var compensationwait = {
             type: "html-keyboard-response",
             stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-            "Compensation cannot be garanteed for incomplete participation. Following completion, you will be compensated via </p>",
+            "Compensation cannot be guaranteed for incomplete participation. Following completion, you will be compensated via </p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
             };
            var compensationgo = {
             type: "html-keyboard-response",
             stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-            "Compensation cannot be garanteed for incomplete participation. Following completion, you will be compensated via </p>"+
+            "Compensation cannot be guaranteed for incomplete participation. Following completion, you will be compensated via </p>"+
             "<p>Press any key to continue.</p>",
             };
-          timeline.push(instructions_p6wait,instructions_p6go);
+          timeline.push(compensationwait, compensationgo);
        
     /* instructions pg 7 */
           var instructions_p7wait = {
@@ -335,9 +335,9 @@
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: ['Still need to decide what these choices should be'] },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Aa'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Aa'],1) },
+			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Da','Ga'],1) },
 		],
 		randomize_order: true,
     	repetitions: 0
@@ -398,10 +398,10 @@
 			}
 		],
 		timeline_variables: [
-            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Aa'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','La','Na'],1) },
+            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Bpa','Ta'],1) },
             { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
             { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 					
@@ -523,10 +523,10 @@ var post_exposure = {
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Aa'],1) },
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','La','Na'],1) },
+            { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Bpa','Ta'],1) },
             { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
             { video: ['https://BrianOdegaard.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 		
@@ -540,14 +540,14 @@ var post_exposure = {
       var endwait = {
         type: "html-keyboard-response",
         stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> "+
-        "Compensation cannot be gauranteed for incomplete participation.</p>",
+        "Compensation cannot be guaranteed for incomplete participation.</p>",
         choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
         };
        var endgo = {
         type: "html-keyboard-response",
         stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> "+
-        "Compensation cannot be gauranteed for incomplete participation.</p>"+
+        "Compensation cannot be guaranteed for incomplete participation.</p>"+
        "<p> Press any key to continue.</p>",
         };
       timeline.push(endwait,endgo);
