@@ -67,8 +67,8 @@
       var trial = {
         type:'external-html',
         url: "https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/external_page2.html",
-        cont_btn: "start",
-        check_fn: check_consent
+        cont_btn: "consent-button",
+        //check_fn: check_consent
     };
     timeline.push(trial);
     
@@ -565,7 +565,7 @@ var post_exposure = {
   		timeline: timeline,
   		show_progress_bar: true,
   		on_finish: function() {
-      			jsPsychSheet.uploadData(jsPsych.data.get().csv());
+      			
   		}
 	});
 
