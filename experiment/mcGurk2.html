@@ -233,15 +233,17 @@
     /* instructions pg 5 */
           var instructions_p5wait = {
             type: "html-keyboard-response",
-            stimulus: "<p>During the second part of the experiment, you will be presented with a series of videos. " +
-            "Please be sure to maintain your position and attention for this part of the experiment.</p>",
+            stimulus: "<p>During the second part of the experiment, you will be presented with a series of videos.</p> " +
+            "<p>Please be sure to maintain your position and keep your eyes on the screen as videos play one after the other in a long series." +
+            "This will last for 2-3 minutes total. <strong>Make sure you do not look away.</strong></p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 5000,
             };
            var instructions_p5go = {
             type: "html-keyboard-response",
-            stimulus: "<p>During the second part of the experiment, you will be presented with a series of videos. " +
-            "Please be sure to maintain your position and attention for this part of the experiment.</p>" +
+            stimulus: "<p>During the second part of the experiment, you will be presented with a series of videos.</p> " +
+            "<p>Please be sure to maintain your position and keep your eyes on the screen as videos play one after the other in a long series." +
+            "This will last for 2-3 minutes total. <strong>Make sure you do not look away.</strong></p>"+
             "<p>Press any key to continue.</p>",
             };
           timeline.push(instructions_p5wait, instructions_p5go);
@@ -412,13 +414,17 @@
      /* prep for exposure trial */ 
          var exposure_prepwait = {
            type: "html-keyboard-response",
-           stimulus: "<p>This concludes the first part of the experiment. In this next part, you will be watching a series of videos.</p>",
+           stimulus: "<p>This concludes the first part of the experiment. In this next part, you will be watching a series of videos.</p>"+
+           "<p>Please be sure to maintain your position and keep your eyes on the screen as videos play one after the other in a long series." +
+            "This will last for 2-3 minutes total. <strong>Make sure you do not look away.</strong></p>",
            choices: jsPsych.NO_KEYS,
             trial_duration: 5000,
          };
          var exposure_prepgo = {
            type: "html-keyboard-response",
-           stimulus: "<p>This concludes the first part of the experiment. In this next part, you will be watching a series of videos.</p>" +
+           stimulus: "<p>This concludes the first part of the experiment. In this next part, you will be watching a series of videos.</p>"+
+           "<p>Please be sure to maintain your position and keep your eyes on the screen as videos play one after the other in a long series." +
+            "This will last for 2-3 minutes total. <strong>Make sure you do not look away.</strong></p>"+
            "<p>Press any key to begin the second part.</p>",
          };
          timeline.push(exposure_prepwait,exposure_prepgo);
