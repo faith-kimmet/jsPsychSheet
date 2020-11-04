@@ -270,7 +270,7 @@
           var compensationwait = {
             type: "html-keyboard-response",
             stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-            "Following completion, you will be compensated via ___ </p>",
+            "You will be automatically be compensated for your participation. Credits will be added to your SONA account shortly after completing the experiment. </p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
             };
@@ -429,7 +429,7 @@
          };
          timeline.push(exposure_prepwait,exposure_prepgo);
 	
-    /* define exposure condition */
+    /* define exposure condition CONGRUENT STIMULI*/
 var exposure = {
 		timeline: [
 			{
@@ -446,27 +446,11 @@ var exposure = {
 		],
 		timeline_variables: [
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualNa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualTa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryDaVisualMa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualKa.mp4']},
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualTa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryNaVisualDa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualNa.mp4']},
 			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualTa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryTaVisualGa.mp4']},
 		],
 		randomize_order: true,
-    	repetitions: 0
+    	repetitions: 15
 	}
 	timeline.push(exposure);
     
