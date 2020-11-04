@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<!-- jsPsych library -->
-	<base target="_top">
-	<!-- jsPsych library -->
-	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/jspsych.js"></script>
-    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-survey-text.js"></script>
-    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-survey-multi-choice.js"></script>
-	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-html-slider-response.js"></script>
-	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-button-response.js"></script>
-	<script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-external-html.js"></script>
-    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-fullscreen.js"></script>
-    <script src="https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/jspsych-video-keyboard-response.js"></script>
-	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/jspsych.css">
-    <link href="https://sampedersen.github.io/jsPsychSheet/jspsych/css/format.css"rel="stylesheet"type="text/css">
-      <style>
-        img {
-          width: 650px,
-          height: 427px;
-        }
-       </style>
-    
-	<!-- jsPsychSheet library -->
-    	<base target="_top">
-    	<script src="https://sampedersen.github.io/jsPsychSheet/jspsychsheet.js"></script>
-    	<link rel="stylesheet" href="https://sampedersen.github.io/jsPsychSheet/jspsychsheet.css">
-    </head>
-    <body></body>
-    <script>
+function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
+    jsSheetHandle.CreateSession(RunExperiment)
 
-	// generate a random subject ID with 15 characters
+    function RunExperiment(session) {
+        // generate a random subject ID with 15 characters
 	var subject_id = jsPsych.randomization.randomID(6);
 	
 	// record the condition assignment in the jsPsych data
@@ -153,7 +124,7 @@
        
        var pre_if_trial = {
       type: 'video-keyboard-response',
-      sources: ['https://crubiera.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'],
+      sources: ['resources/AuditoryBaVisualBa.mp4'],
       width: 800,
   		prompt: '<p>Press any key to repeat the video and adjust your volume as necessary. When you are ready to continue, press C.</p>'
   	}
@@ -174,7 +145,7 @@
     Need to insert instruction image*/
           var instructions_p2wait = {
             type: "image-keyboard-response",
-            stimulus: "https://sampedersen.github.io/jsPsychSheet/images/arm.png",
+            stimulus: "resources/arm.png",
             prompt: "<p>This experiment consists of three parts, each part having multiple trials.</p>"+ 
             "<p>Throughout the entirety of the experiment, please sit at an arm's distance from your computer screen, as illustrated above. "+ 
             "Your attention should also be focused on the center of your screen.</p>",
@@ -184,7 +155,7 @@
            
            var instructions_p2go = {
             type: "image-keyboard-response",
-            stimulus: "https://sampedersen.github.io/jsPsychSheet/images/arm.png",
+            stimulus: "resources/arm.png",
             prompt: "<p>This experiment consists of three parts, each part having multiple trials.</p> "+ 
             "<p>Throughout the entirity of the experiment, please sit at an arm's distance from your computer screen, as illustrated above. "+ 
             "Your attention should also be focused on the center of your screen.</p>"+
@@ -336,9 +307,9 @@
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) }, 
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) }, 
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },  
+			{ video: ['resources/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) }, 
+			{ video: ['resources/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) }, 
+			{ video: ['resources/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },  
 		],
 		randomize_order: true,
     	repetitions: 0
@@ -399,12 +370,12 @@
 			}
 		],
 		timeline_variables: [
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Da','Ta'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
+            { video: ['resources/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['resources/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
+            { video: ['resources/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
+            { video: ['resources/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Da','Ta'],1) },
+            { video: ['resources/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+            { video: ['resources/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 					
         ],
 		randomize_order: true,
@@ -446,9 +417,9 @@ var exposure = {
 			
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualBa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualMa.mp4']},
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualPa.mp4']},
+			{ video: ['resources/AuditoryBaVisualBa.mp4']},
+			{ video: ['resources/AuditoryMaVisualMa.mp4']},
+			{ video: ['resources/AuditoryPaVisualPa.mp4']},
 		],
 		randomize_order: true,
     	repetitions: 15
@@ -512,12 +483,12 @@ var post_exposure = {
 			}
 		],
 		timeline_variables: [
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
-			{ video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Da','Ta'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
-            { video: ['https://sampedersen.github.io/jsPsychSheet/experiment/video/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
+			{ video: ['resources/AuditoryBaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+			{ video: ['resources/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) },
+            { video: ['resources/AuditoryMaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ma','Ga','Na','Ba'],1) },
+            { video: ['resources/AuditoryPaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ka','Da','Ta'],1) },
+            { video: ['resources/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Da','Ka','Ta'],1) },
+            { video: ['resources/AuditoryPaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Pa','Ga','Ka','Ta'],1) },
 					
         ],
 		randomize_order: true,
@@ -550,11 +521,11 @@ var post_exposure = {
 	/* start the experiment */
 	jsPsych.init({
   		timeline: timeline,
-  		show_progress_bar: true,
+        show_progress_bar: true,
+        on_trial_finish: session.insert, 
   		on_finish: function() {
-      	window.top.location.href = 'https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=142&credit_token=3741fe5ad9094ae1b8897c626c5aa9fd&survey_code=' + 1		
+      	window.top.location.href = `https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=142&credit_token=3741fe5ad9094ae1b8897c626c5aa9fd&survey_code=${survey_code}`	
   		}
 	});
-
-    </script>
-</html>
+    }
+}

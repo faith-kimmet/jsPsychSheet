@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flash-Face Task</title>
+        
+        <!-- Repo -->
+        <base id="base-url" href="https://sampedersen.github.io/jsPsychSheet/" target="_blank">
+        <script src="jspsych/plugins/jspsych-survey-text.js"></script>
+        <script src="jspsych/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych/plugins/jspsych-html-slider-response.js"></script>
+        <script src="jspsych/plugins/jspsych-video-button-response.js"></script>
+        <script src="jspsych/plugins/jspsych-external-html.js"></script>
+        <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+        <script src="jspsych/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych/plugins/jspsych-video-keyboard-response.js"></script>
+
+        <!-- jsPsych -->
+        <script src="jspsych/jspsych.js"></script>
+        
+        <!-- jsPsych Plugins -->
+        <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych/plugins/jspsych-instructions.js"></script>
+
+        <!-- Style Sheets-->
+        <link href="jspsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+        <!-- jsSheet -->
+        <script src="jsSheet/jsSheet.js"></script>
+
+        <!-- Experiment Files -->
+        <script src="ExampleExperiment.js"></script>
+
+        <script>
+            ExampleExperiment(jsSheet, jsPsych, <?= survey_code ?>)
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
