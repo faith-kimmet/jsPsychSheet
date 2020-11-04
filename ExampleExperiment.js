@@ -37,7 +37,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
    /* require consent */
       var trial = {
         type:'external-html',
-        url: "https://sampedersen.github.io/jsPsychSheet/jspsych/plugins/external_page2.html",
+        url: "resources/Consent.html",
         cont_btn: "consent-button",
         //check_fn: check_consent
     };
