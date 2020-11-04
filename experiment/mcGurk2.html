@@ -73,22 +73,23 @@
     timeline.push(trial);
     
     /* browser check */
-         var browser_wait = {
-           type: "html-keyboard-response",
-           stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
-           "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. ", 
-           choices: jsPsych.NO_KEYS,
-           trial_duration: 7500,
-          };
-      
-         var browser_go = {
-           type: "html-keyboard-response",
-           stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
-           "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. "+ 
-           "<p>Press any key to continue.</p>",
-          };
-          timeline.push(browser_wait, browser_go);
-  
+    
+    let browser = {
+    type: 'html-keyboard-response',
+    stimulus: function() {
+      return '<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser.'+
+        jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+      },
+    choices: jsPsych.timelineVariable('choices'),
+    trial_duration: jsPsych.timelineVariable('trial_duration'),
+    timeline: [{}],
+    timeline_variables: [  
+      {choices: jsPsych.NO_KEYS, trial_duration: 7500, extra_instruction: ''},
+      {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+      ]
+    };
+    timeline.push(browser);          
+          
     /* collect participant data - age */
     var survey = {
       type: "survey-text",
@@ -551,7 +552,7 @@ var post_exposure = {
   		timeline: timeline,
   		show_progress_bar: true,
   		on_finish: function() {
-      			
+      	window.top.location.href = 'https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=142&credit_token=3741fe5ad9094ae1b8897c626c5aa9fd&survey_code=' + 1		
   		}
 	});
 
