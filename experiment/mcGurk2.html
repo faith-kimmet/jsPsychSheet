@@ -76,8 +76,7 @@
          var browser_wait = {
            type: "html-keyboard-response",
            stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
-           "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. "+ 
-           "<strong>Compensation cannot be guaranteed if responses are not properly recorded due to browser issues. </strong></p>",
+           "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. ", 
            choices: jsPsych.NO_KEYS,
            trial_duration: 7500,
           };
@@ -86,7 +85,6 @@
            type: "html-keyboard-response",
            stimulus: "<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. "+
            "If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser. "+ 
-           "<strong>Compensation cannot be guaranteed if responses are not properly recorded due to browser issues. </strong></p>" +
            "<p>Press any key to continue.</p>",
           };
           timeline.push(browser_wait, browser_go);
@@ -270,14 +268,14 @@
           var compensationwait = {
             type: "html-keyboard-response",
             stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-            "Compensation cannot be guaranteed for incomplete participation. Following completion, you will be compensated via </p>",
+            "Following completion, you will be compensated via ___ </p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
             };
            var compensationgo = {
             type: "html-keyboard-response",
-            stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-            "Compensation cannot be guaranteed for incomplete participation. Following completion, you will be compensated via </p>"+
+            stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded."+
+            "You will be automatically be compensated for your participation. Credits will be added to your SONA account shortly after completing the experiment. </p>"+
             "<p>Press any key to continue.</p>",
             };
           timeline.push(compensationwait, compensationgo);
@@ -539,15 +537,13 @@ var post_exposure = {
     /* closing page */
       var endwait = {
         type: "html-keyboard-response",
-        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> "+
-        "Compensation cannot be guaranteed for incomplete participation.</p>",
+        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong></p>",
         choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
         };
        var endgo = {
         type: "html-keyboard-response",
         stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> "+
-        "Compensation cannot be guaranteed for incomplete participation.</p>"+
        "<p> Press any key to continue.</p>",
         };
       timeline.push(endwait,endgo);
