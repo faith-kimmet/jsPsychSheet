@@ -492,13 +492,13 @@ var post_exposure = {
     /* closing page */
       var endwait = {
         type: "html-keyboard-response",
-        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong></p>",
+        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> Press the right arrow key to receive automated SONA credit.</p>",
         choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
         };
        var endgo = {
         type: "html-keyboard-response",
-        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> "+
+        stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> Press the right arrow key to receive automated SONA credit. </p>"+
        "<p> Press any key to continue.</p>",
         };
       timeline.push(endwait,endgo);
