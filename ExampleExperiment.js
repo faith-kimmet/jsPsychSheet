@@ -81,13 +81,6 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
      };
      timeline.push(sex);
      
-     /* fullscreen mode */ 
-    var fullscreen = {
-      type: "fullscreen",
-      fullscreen_mode:true,
-    };
-    timeline.push(fullscreen);
-     
     /* instructions pg 1  */ 
          var instructions_p1wait = {
            type: "html-keyboard-response",
@@ -510,13 +503,6 @@ var post_exposure = {
         };
       timeline.push(endwait,endgo);
     
-    /* exit fullscreen mode */ 
-    var fullscreen_exit = {
-      type: "fullscreen",
-      fullscreen_mode:false
-    };
-    timeline.push(fullscreen_exit);
-	
 
 	/* start the experiment */
 	jsPsych.init({
