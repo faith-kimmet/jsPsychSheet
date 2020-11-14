@@ -410,9 +410,9 @@ var exposure = {
 			
 		],
 		timeline_variables: [
-			{ video: ['resources/AuditoryBaVisualBa.mp4']},
-			{ video: ['resources/AuditoryMaVisualMa.mp4']},
-			{ video: ['resources/AuditoryPaVisualPa.mp4']},
+			{ video: ['resources/AuditoryDaVisualMa.mp4']},
+			{ video: ['resources/AuditoryNaVisualDa.mp4']},
+			{ video: ['resources/AuditoryTaVisualGa.mp4']},
 		],
 		randomize_order: true,
     	repetitions: 15
