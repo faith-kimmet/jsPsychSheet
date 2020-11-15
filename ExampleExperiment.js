@@ -510,7 +510,7 @@ var post_exposure = {
         show_progress_bar: true,
         on_trial_finish: session.insert, 
   		on_finish: function() {
-      	window.top.location.href = `https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=142&credit_token=3741fe5ad9094ae1b8897c626c5aa9fd&survey_code=${survey_code}`	
+      	window.top.location.href = `https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=143&credit_token=fe3b3264aa6348e5a35c79cc561b1ff1&survey_code=${survey_code}`	
   		}
 	});
     }
