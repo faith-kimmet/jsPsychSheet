@@ -34,7 +34,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
     };
 
 
-   /* require consent */
+   /* require consent before continuing */
       var trial = {
         type:'external-html',
         url: "resources/Consent.html",
@@ -43,8 +43,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
     };
     timeline.push(trial);
     
-    /* browser check */
-    
+    /* encourage participants to use Google Chrome/Firefox */    
     let browser = {
     type: 'html-keyboard-response',
     stimulus: function() {
@@ -98,7 +97,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
           };
           timeline.push(instructions_p1wait, instructions_p1go);
       
-      /* sound check */   
+      /* sound check instructions */   
           var sound_instructionswait = {
             type: "html-keyboard-response",
             stimulus: "<p>For the duration of the experiment, please use headphones or turn your speakers to a comfortable volume. " + 
@@ -115,6 +114,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          };
            timeline.push(sound_instructionswait, sound_instructionsgo);
        
+	    /* sound check screen */
        var pre_if_trial = {
       type: 'video-keyboard-response',
       sources: ['resources/AuditoryBaVisualBa.mp4'],
@@ -134,8 +134,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
   	};
       timeline.push(pre_if_trial, loop_node);
       
-    /* instructions pg 2 
-    Need to insert instruction image*/
+    /* instructions pg 2 */
           var instructions_p2wait = {
             type: "image-keyboard-response",
             stimulus: "resources/arm.png",
@@ -231,7 +230,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             };
           timeline.push(instructions_p6wait,instructions_p6go);
           
-    /* compensation page */
+    /* compensation information */
           var compensationwait = {
             type: "html-keyboard-response",
             stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
@@ -309,7 +308,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 	}
 	timeline.push(practice_trial);
     
-    /* prep for experiment trials */ 
+    /* prepare to begin experiment */ 
          var pretestwait = {
            type: "html-keyboard-response",
            stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. " + 
@@ -326,7 +325,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          timeline.push(pretestwait,pretestgo);
     
     
-    /*define pre-exposure */
+    /* pre-exposure task */
 	var pre_exposure = {
 		timeline: [
 			{
@@ -394,7 +393,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          };
          timeline.push(exposure_prepwait,exposure_prepgo);
 	
-    /* define exposure condition CONGRUENT STIMULI*/
+    /* exposure phase 	INCONGRUENT STIMULI NEVER BIND */
 var exposure = {
 		timeline: [
 			{
@@ -419,7 +418,7 @@ var exposure = {
 	}
 	timeline.push(exposure);
     
-    /* prep for post-exposure trial */ 
+    /* prep for post-exposure task */ 
          var postexposure_prepwait = {
            type: "html-keyboard-response",
            stimulus: "<p>This concludes the second part of the experiment. You will now begin the last part. " +
@@ -439,7 +438,7 @@ var exposure = {
          };
          timeline.push(postexposure_prepwait,postexposure_prepgo);
 	    
-   /* define post-exposure condition */     
+   /* post-exposure task */     
 var post_exposure = {
 		timeline: [
 			{
@@ -504,7 +503,7 @@ var post_exposure = {
       timeline.push(endwait,endgo);
     
 
-	/* start the experiment */
+	/* experiment initiation sequence */
 	jsPsych.init({
   		timeline: timeline,
         show_progress_bar: true,
