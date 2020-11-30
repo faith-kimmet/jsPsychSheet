@@ -393,7 +393,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          };
          timeline.push(exposure_prepwait,exposure_prepgo);
 	
-    /* exposure phase 	INCONGRUENT STIMULI NEVER BIND */
+    /* exposure phase 	INCONGRUENT STIMULI INTERMEDIATE BINDING */
 var exposure = {
 		timeline: [
 			{
@@ -409,9 +409,9 @@ var exposure = {
 			
 		],
 		timeline_variables: [
+			{ video: ['resources/AuditoryBaVisualTa.mp4']},
+			{ video: ['resources/AuditoryPaVisualTa.mp4']},
 			{ video: ['resources/AuditoryDaVisualMa.mp4']},
-			{ video: ['resources/AuditoryNaVisualDa.mp4']},
-			{ video: ['resources/AuditoryTaVisualGa.mp4']},
 		],
 		randomize_order: true,
     	repetitions: 15
