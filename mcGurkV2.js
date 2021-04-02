@@ -207,7 +207,6 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
         /* define practice trial */
         /* this needs to be edited to run like new experiment*/
-        // Copy from trial format ~ 30 lines below
         // var practice_trial = {};
 
         /* prepare to begin experiment */
@@ -231,8 +230,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 //////////////////////////////////////////////      EXPERIMENT     /////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Stimuli
-
+        // Stimuli bank
         /*
 
         congruentStimuli: [
@@ -257,6 +255,65 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         ]
 
         */
+
+        // Trial sequence
+            // TODO: Add an interval screen (?)
+        /*
+         var trialTimeline = {
+            timeline: [
+
+            // Show video
+            { type: 'video-button-response',
+            sources: jsPsych.timelineVariable('video'),
+            width: 800,
+            choices: [],
+            data: jsPsych.timelineVariable('video'),
+            trial_ends_after_video: true,
+                prompt: '<p></p>'
+            },
+
+            // Participant percept
+            { type: 'video-button-response',
+            sources: [],
+            width: 800,
+            choices: jsPsych.timelineVariable('syllables'),
+            data: jsPsych.timelineVariable('syllables'),
+            prompt: '<p>Which syllable did you perceive?</p>'
+            },
+
+            // Participant confidence
+            { type: 'html-slider-response',
+            stimulus: '<p>How confident are you in your answer?</p>',
+            labels: ['0','25','50','75','100'],
+            min: 0,
+            max: 100,
+            start: function(){
+                return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];},
+            step: 1,
+            prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
+            require_movement:true
+            }
+            ],
+
+            timeline_variables: [
+               // See stimuli bank
+            ],
+
+            randomize_order: true,
+            repetitions: 15
+        }
+
+        */
+
+        // Experimental sequence
+            // TODO: Add an interval screen (?)
+        /*
+            var experimentTimeline = {
+                timeline: [trialTimeline, interval],
+                randomize_order: true,
+                repetitions: 6
+                }
+         */
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
