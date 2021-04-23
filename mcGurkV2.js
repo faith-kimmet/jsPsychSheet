@@ -48,7 +48,9 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         let browser = {
             type: 'html-keyboard-response',
             stimulus: function() {
-                return '<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested browser.'+
+                return '<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. ' +
+                    'If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested ' +
+                    'browser.'+
                     jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
             choices: jsPsych.timelineVariable('choices'),
@@ -92,40 +94,40 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 /* ----------------------------------   Generic instructions    ---------------------------------------------------*/
 
         /* instructions pg 1  */
-        var instructions_p1wait = {
-            type: "html-keyboard-response",
-            stimulus:
-                "<p>Thank you for your participation in this experiment. " +
-                "Please read the instructions entirely before beginning.</p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 5000,
+        let introInstructions = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>Thank you for your participation in this experiment. ' +
+                ' Please read the instructions entirely before beginning.</p>' +
+                jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 3000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var instructions_p1go = {
-            type:"html-keyboard-response",
-            stimulus:
-                "<p>Thank you for your participation in this experiment. " +
-                "Please read the instructions entirely before beginning.</p>"+
-                "<p>Press any key to continue.</p>",
-        };
-        timeline.push(instructions_p1wait, instructions_p1go);
+        timeline.push(introInstructions);
 
-        /* sound check instructions */
-        var sound_instructionswait = {
-            type: "html-keyboard-response",
-            stimulus:
-                "<p>For the duration of the experiment, please use headphones or turn your speakers to a comfortable volume. " +
-                "Please use the following screen as an opportunity to check your audio settings and adjust as necessary.</p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 7500,
+        /* instructions pg 2 - sound check instructions */
+        let soundCheckInstructions = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>For the duration of the experiment, please use headphones or turn your speakers to a comfortable volume.' +
+                    'Please use the following screen as an opportunity to check your audio settings and adjust as necessary.</p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 3000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var sound_instructionsgo = {
-            type: "html-keyboard-response",
-            stimulus:
-                "<p>For the duration of the experiment, please use headphones or turn your speakers to a comfortable volume. "+
-                "Please use the following screen as an opportunity to check your audio settings and adjust as necessary.</p>" +
-                "<p>Press any key to continue.</p>",
-        };
-        timeline.push(sound_instructionswait, sound_instructionsgo);
+        timeline.push(soundCheckInstructions);
 
         /* sound check screen */
         var pre_if_trial = {
@@ -134,7 +136,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             width: 800,
             prompt:
                 '<p>Press any key to repeat the video and adjust your volume as necessary. When you are ready to continue, press C.</p>'
-        }
+        };
         var loop_node = {
             timeline: [pre_if_trial],
             loop_function: function(data){
@@ -149,8 +151,8 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         timeline.push(pre_if_trial, loop_node);
 
 
-        /* instructions pg 2 */
-        var instructions_p2wait = {
+        /* instructions pg 3 */
+        var instructions_p3wait = {
             type: "image-keyboard-response",
             stimulus: "resources/arm.png",
             prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance from your computer " +
@@ -158,86 +160,203 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
         };
-        var instructions_p2go = {
+        var instructions_p3go = {
             type: "image-keyboard-response",
             stimulus: "resources/arm.png",
             prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance from your computer " +
                 "screen, as illustrated above. Your attention should also be focused on the center of your screen.</p>" +
                 "<p> Once you have done so, press any key to continue.</p>",
         };
-        timeline.push(instructions_p2wait, instructions_p2go);
+        timeline.push(instructions_p3wait, instructions_p3go);
 
 
 /*  --------------------------------- EXPERIMENT INFORMATION -------------------------------------------------------*/
         // Insert experiment instructions here //
 
-        /* compensation information */
-        var compensationwait = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded. "+
-                "You will be automatically be compensated for your participation. Credits will be added to your SONA account shortly after completing the experiment. </p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 7500,
+        let  instructionsPg3 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>For this experiment, you will be watching videos of a woman prounouncing a syllable. ' +
+                    'Each video will play only <strong>once</strong> per trial.</p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 4000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var compensationgo = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Once you have completed the experiment, <strong>do not close your browser window</strong> until your responses have been confirmed as recorded."+
-                "You will be automatically be compensated for your participation. Credits will be added to your SONA account shortly after completing the experiment. </p>"+
-                "<p>Press any key to continue.</p>",
+        timeline.push(instructionsPg3);
+
+        let instructionsPg4 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>After watching the video, select the syllable that best matches the sound made by the woman. </p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 2000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        timeline.push(compensationwait, compensationgo);
+        timeline.push(instructionsPg4);
+
+        let instructionsPg5 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>After providing a response, please indicate how confident you feel in your selection on a scale of 0 to 100. ' +
+                    '0 indicates <strong>no confidence</strong> and 100 indicates <strong>full confidence</strong>.</p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 4000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
+        };
+        timeline.push(instructionsPg5);
+
+        let instructionsPg6 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return ' <p> After providing a confidence response, the next video will automatically play and this sequence will repeat. ' +
+                    ' The experiment will be conducted in three blocks. Each block will be separated by a short break period. ' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 5000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
+        };
+        timeline.push(instructionsPg6);
+
+        let compensationInfo = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return ' Note: new platform => compensation method ' +
+                    ' abc ' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 1000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
+        };
+        timeline.push(compensationInfo);
+
 
 /* ----------------------------------------    PRACTICE    ------------------------------------------------------ */
 
-        /* instructions pg 7 */
-        var instructions_p7wait = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Before the experiment begins, we will conduct some practice trials."+
-                "These trials are only for practice and your responses will not be recorded.</p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 5000,
+        let instructionsPg7 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>Before the experiment begins, we will conduct some practice trials.' +
+                    'These trials are only for practice and your responses will not be recorded.</p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 3000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var instructions_p7go = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Before the experiment begins, we will conduct some practice trials."+
-                "These trials are only for practice and your responses will not be recorded.</p>"+
-                "<p> Press any key to begin.</p>",
+        timeline.push(instructionsPg7);
+
+        var practiceTrial = {
+            timeline: [
+                // Show video
+                { type: 'video-button-response',
+                    sources: jsPsych.timelineVariable('video'),
+                    width: 800,
+                    choices: [],
+                    data: jsPsych.timelineVariable('video'),
+                    trial_ends_after_video: true,
+                    prompt: '<p></p>'
+                },
+
+                // Participant percept
+                { type: 'video-button-response',
+                    sources: [],
+                    width: 800,
+                    choices: jsPsych.timelineVariable('syllables'),
+                    data: jsPsych.timelineVariable('syllables'),
+                    prompt: '<p>Which syllable did you perceive?</p>'
+                },
+
+                // Participant confidence
+                { type: 'html-slider-response',
+                    stimulus: '<p>How confident are you in your answer?</p>',
+                    labels: ['0','25','50','75','100'],
+                    min: 0,
+                    max: 100,
+                    start: function(){
+                        return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];},
+                    step: 1,
+                    prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
+                    require_movement:true
+                }
+            ],
+            timeline_variables: [
+                { video: ['resources/AuditoryBaVisualBa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ga','Da','Ma'],1) },
+                { video: ['resources/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Da','Ga','Pa'],1) },
+                { video: ['resources/AuditoryBaVisualKa.mp4'], syllables: jsPsych.randomization.repeat(['Ba','Ka','Ga','Da'],1) }
+            ]
+            randomize_order: false,
+            repetitions: 0
         };
-        timeline.push(instructions_p7wait,instructions_p7go);
+        timeline.push(practiceTrial);
 
         /* define practice trial */
         /* this needs to be edited to run like new experiment*/
         // var practice_trial = {};
 
-        /* prepare to begin experiment */
-        var pretestwait = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. " +
-                "Please be sure that you are seated arm's distance from your screen. <strong>Your responses will now be recorded.</strong></p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 6000,
+        let instructionsPg8 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. ' +
+                    'Please be sure that you are seated arm\'s distance from your screen. ' +
+                    '<strong>Your responses will now be recorded.</strong></p>' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: *5000*, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var pretestgo = {
-            type: "html-keyboard-response",
-            stimulus: "<p>Now that you have completed the practice trials, we are ready to begin the first part of the experiment. " +
-                "Please be sure that you are seated arm's distance from your screen. <strong>Your responses will now be recorded.</strong></p>" +
-                "<p>Press any key to begin the experiment.</p>",
-        };
-        timeline.push(pretestwait,pretestgo);
+        timeline.push(instructionsPg8);
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////      EXPERIMENT     /////////////////////////////////////////////////////
+//////////////////////////////////////////////      EXPERIMENT FORMAT     /////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Stimuli bank
         /*
 
         congruentStimuli: [
-        { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', ],1) },
-        { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', ],1) },
-        { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', ],1) },
-        { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', ],1) },
+        { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', '--' ],1) },
+        { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
+        { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', '--', --', '--'],1) },
+        { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', '--', '--'],1) },
         ]
 
         mcGurkStimuli: [
@@ -248,10 +367,10 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         ]
 
         incongruentStimuli: [
-         { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', ],1) },
-         { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', ],1) },
-         { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', ],1) },
-         { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma',],1) },
+         { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', 'Ka', 'Ma'],1) },
+         { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ka', 'Da'],1) },
+         { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', '--', '--'],1) },
+         { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', '--', '--'],1) }
         ]
 
         */
@@ -315,25 +434,225 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 }
          */
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////      Congruent Exposure         ////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        var congruentTimeline = {
+            timeline: [
+                {   // Show video
+                    type: 'video-button-response',
+                    sources: jsPsych.timelineVariable('video'),
+                    width: 800,
+                    choices: [],
+                    data: jsPsych.timelineVariable('video'), /* Store the video name */
+                    trial_ends_after_video: true,
+                    prompt: '<p></p>'
+                },
+                {   // Collect participant's percept
+                    type: 'video-button-response',
+                    sources: [],
+                    width: 800,
+                    choices: jsPsych.timelineVariable('syllables'),
+                    data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+                    prompt: '<p>Which syllable did you perceive?</p>'
+                {
+                    // Participant confidence
+                    type: 'html-slider-response',
+                    stimulus: '<p>How confident are you in your answer?</p>',
+                    labels: ['0','25','50','75','100'],
+                    min: 0,
+                    max: 100,
+                    start: function(){
+                        return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+                    },
+                    step: 1,
+                    prompt: "<p>Rate your confidence from 0 (no confidence) to 100 (fully confident)</p>",
+                    require_movement:true
+                }
+                ],
+            timeline_variables: [
+                { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', '--' ],1) },
+                { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
+                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', '--', '--', '--'],1) },
+                { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', '--', '--'],1) }
+                ],
+            randomize_order: true,
+            repetitions: 15 //This may change
+        };
+
+        let endCongruentExposure = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p> This concludes the first portion of the experiment. Please use this screen to take a break. ' +
+                    ' There is no time-limit. ' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 2000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>When you are ready to continue, press any key.</p>'}
+            ]
+        };
+        timeline.push(endCongruentExposure);
+
+        var startMcGurkExposure = {
+            type: "html-keyboard-response",
+            stimulus:
+                "<p> Press any key to begin the next part of the experiment. </p>"
+        };
+
+        timeline.push(congruentTimeline, endCongruentExposure, startMcGurkExposure);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////      McGurk Exposure         ////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        var mcGurkTimeline = {
+            timeline: [
+                {   // Show video
+                    type: 'video-button-response',
+                    sources: jsPsych.timelineVariable('video'),
+                    width: 800,
+                    choices: [],
+                    data: jsPsych.timelineVariable('video'), /* Store the video name */
+                    trial_ends_after_video: true,
+                    prompt: '<p></p>'
+                },
+                {   // Collect participant's percept
+                    type: 'video-button-response',
+                    sources: [],
+                    width: 800,
+                    choices: jsPsych.timelineVariable('syllables'),
+                    data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+                    prompt: '<p>Which syllable did you perceive?</p>'
+                {
+                    // Participant confidence
+                    type: 'html-slider-response',
+                    stimulus: '<p>How confident are you in your answer?</p>',
+                    labels: ['0','25','50','75','100'],
+                    min: 0,
+                    max: 100,
+                    start: function(){
+                        return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+                    },
+                    step: 1,
+                    prompt: "<p>Rate your confidence from 0 (no confidence) to 100 (fully confident)</p>",
+                    require_movement:true
+                }
+            ],
+            timeline_variables: [
+                { video: ['resources/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma', 'Ta', 'Na', 'La'],1) },
+                { video: ['resources/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba', 'Ta', 'Pa', 'Da'],1) },
+                { video: ['resources/AuditoryBaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Ba', 'Da', 'Ga', 'Pa'],1) },
+                { video: ['resources/AuditoryPaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Da', 'Ka', 'Ta'],1) },
+            ]
+            randomize_order: true,
+            repetitions: 15 //This may change
+        };
+
+        let endMcGurkExposure = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p> This concludes the second portion of the experiment. Please use this screen to take a break. ' +
+                    ' There is no time-limit. ' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 2000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>When you are ready to continue, press any key.</p>'}
+            ]
+        };
+        timeline.push(endMcGurkExposure);
+
+        var startNonBindingExposure = {
+            type: "html-keyboard-response",
+            stimulus:
+                "<p> Press any key to begin the last part of the experiment. </p>"
+        };
+
+        timeline.push(mcGurkTimeline, endMcGurkExposure, startNonBindingExposure);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////      NonBinding Exposure         ////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        var nonBindingTimeline = {
+            timeline: [
+                {   // Show video
+                    type: 'video-button-response',
+                    sources: jsPsych.timelineVariable('video'),
+                    width: 800,
+                    choices: [],
+                    data: jsPsych.timelineVariable('video'), /* Store the video name */
+                    trial_ends_after_video: true,
+                    prompt: '<p></p>'
+                },
+                {   // Collect participant's percept
+                    type: 'video-button-response',
+                    sources: [],
+                    width: 800,
+                    choices: jsPsych.timelineVariable('syllables'),
+                    data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
+                    prompt: '<p>Which syllable did you perceive?</p>'
+                {
+                    // Participant confidence
+                    type: 'html-slider-response',
+                    stimulus: '<p>How confident are you in your answer?</p>',
+                    labels: ['0','25','50','75','100'],
+                    min: 0,
+                    max: 100,
+                    start: function(){
+                        return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];
+                    },
+                    step: 1,
+                    prompt: "<p>Rate your confidence from 0 (no confidence) to 100 (fully confident)</p>",
+                    require_movement:true
+                }
+            ],
+            timeline_variables: [
+                { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', 'Ka', 'Ma'],1) },
+                { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ka', 'Da'],1) },
+                { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', '--', '--'],1) },
+                { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', '--', '--'],1) }
+            ],
+            randomize_order: true,
+            repetitions: 15 //This may change
+        };
+        timeline.push(nonBindingTimeline);
+
+        
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////      CLOSING         /////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /* closing page */
-        var endwait = {
-            type: "html-keyboard-response",
-            stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> Press the right arrow key to receive automated SONA credit.</p>",
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 7500,
+        let closingPage = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return ' <p>This now concludes the experiment. <strong> ' +
+                    'Please do not close the experiment until your responses have been confirmed as recorded.' +
+                    '</strong> Press the right arrow key to be credited.</p> ' +
+                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: [
+                {choices: jsPsych.NO_KEYS, trial_duration: 1000, extra_instruction: ''},
+                {choices: jsPsych.ALL_KEYS, trial_duration: null, extra_instruction: '<p>Press any key to continue.</p>'}
+            ]
         };
-        var endgo = {
-            type: "html-keyboard-response",
-            stimulus: "<p>This now concludes the experiment. <strong> Please do not close the experiment until your responses have been confirmed as recorded.</strong> Press the right arrow key to receive automated SONA credit. </p>"+
-                "<p> Press any key to continue.</p>",
-        };
-        timeline.push(endwait,endgo);
+        timeline.push(closingPage);
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /* experiment initiation sequence */
         jsPsych.init({
