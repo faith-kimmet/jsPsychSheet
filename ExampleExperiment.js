@@ -60,6 +60,17 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
     };
     timeline.push(browser);          
           
+    var cameraInit = {
+      type: 'webgazer-init-camera',
+      instructions: `<p>The <b>ONLY</b> webcam data collected is the point on the screen you are looking at. No images or recordings will ever leave your computer.</p>
+      <p>Position your head so that the webcam has a good view of your eyes.</p>
+      <p>Use the video in the upper-left corner as a guide. Center your face in the box and look directly towards the camera.</p>
+      <p>It is important that you try and keep your head reasonably still throughout the experiment, so please take a moment to adjust your setup as needed.</p>
+      <p>When your face is centered in the box and the box turns green, you can click to continue.</p>`
+    };
+
+    timeline.push(cameraInit);
+
     /* collect participant data - age */
     var survey = {
       type: "survey-text",
@@ -79,7 +90,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         ]
      };
      timeline.push(sex);
-     
+
     /* instructions pg 1  */ 
          var instructions_p1wait = {
            type: "html-keyboard-response",
@@ -117,7 +128,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 	    /* sound check screen */
        var pre_if_trial = {
       type: 'video-keyboard-response',
-      sources: ['resources/AuditoryBaVisualBa.mp4'],
+      stimulus: ['resources/AuditoryBaVisualBa.mp4'],
       width: 800,
   		prompt: '<p>Press any key to repeat the video and adjust your volume as necessary. When you are ready to continue, press C.</p>'
   	}
@@ -125,7 +136,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
     var loop_node = {
       timeline: [pre_if_trial],
       loop_function: function(data){
-          if(jsPsych.pluginAPI.convertKeyCharacterToKeyCode('c') == data.values()[0].key_press){
+          if('c' == data.values()[0].response){
               return false;
           } else {
             return true;
@@ -267,7 +278,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 		timeline: [
 			{
 				type: 'video-button-response',
-				sources: jsPsych.timelineVariable('video'),
+				stimulus: jsPsych.timelineVariable('video'),
 				width: 800,
 				choices: [],
 				data: jsPsych.timelineVariable('video'), /* Store the video name */
@@ -277,7 +288,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 			},
 			{
 				type: 'video-button-response',
-				sources: [],
+				stimulus: [],
 				width: 800,
 				choices: jsPsych.timelineVariable('syllables'),
 				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
@@ -324,13 +335,53 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          };
          timeline.push(pretestwait,pretestgo);
     
-    
+         var cameraCalibrateInstructions = {
+          type: 'html-keyboard-response',
+          stimulus:`
+              <p>The following event will calibrate our eyetracking. Please focus on dots as they appear, and then left-click each one with your mouse.</p>
+              <p>Press any key to begin.</p>
+          `
+          }
+      
+          var cameraCalibrate = {
+              type: 'webgazer-calibrate',
+              calibration_points: [[25,50], [50,50], [75,50], [50,25], [50,75]],
+              calibration_mode: 'click'
+          }
+      
+          var cameraValidationInstructions = {
+            type: 'html-keyboard-response',
+            stimulus:`
+                <p>The following event will test the accuracy of our eye tracking. Please focus on the black dots as they appear.</p>
+                <p>Press any key to begin.</p>
+            `
+          }
+      
+          var cameraValidation = {
+              type: 'webgazer-validate',
+              validation_points: [[-200,-200], [-200,200], [200,-200], [200,200]],
+              validation_point_coordinates: 'center-offset-pixels',
+          }
+      
+          timeline.push(cameraCalibrateInstructions);
+          timeline.push(cameraCalibrate);
+          timeline.push(cameraValidationInstructions);
+          timeline.push(cameraValidation);
+
     /* pre-exposure task */
 	var pre_exposure = {
+    extensions: [
+      {
+          type: 'webgazer',
+          params: {
+              targets: ['.jspsych-content-wrapper']
+          }
+      }
+    ],
 		timeline: [
 			{
 				type: 'video-button-response',
-				sources: jsPsych.timelineVariable('video'),
+				stimulus: jsPsych.timelineVariable('video'),
 				width: 800,
 				choices: [],
 				data: jsPsych.timelineVariable('video'), /* Store the video name */
@@ -340,7 +391,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 			},
 			{
 				type: 'video-button-response',
-				sources: [],
+				stimulus: [],
 				width: 800,
 				choices: jsPsych.timelineVariable('syllables'),
 				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
@@ -393,12 +444,53 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
          };
          timeline.push(exposure_prepwait,exposure_prepgo);
 	
+         var cameraCalibrateInstructions = {
+          type: 'html-keyboard-response',
+          stimulus:`
+              <p>The following event will calibrate our eyetracking. Please focus on dots as they appear, and then left-click each one with your mouse.</p>
+              <p>Press any key to begin.</p>
+          `
+          }
+      
+          var cameraCalibrate = {
+              type: 'webgazer-calibrate',
+              calibration_points: [[25,50], [50,50], [75,50], [50,25], [50,75]],
+              calibration_mode: 'click'
+          }
+      
+          var cameraValidationInstructions = {
+            type: 'html-keyboard-response',
+            stimulus:`
+                <p>The following event will test the accuracy of our eye tracking. Please focus on the black dots as they appear.</p>
+                <p>Press any key to begin.</p>
+            `
+          }
+      
+          var cameraValidation = {
+              type: 'webgazer-validate',
+              validation_points: [[-200,-200], [-200,200], [200,-200], [200,200]],
+              validation_point_coordinates: 'center-offset-pixels',
+          }
+      
+          timeline.push(cameraCalibrateInstructions);
+          timeline.push(cameraCalibrate);
+          timeline.push(cameraValidationInstructions);
+          timeline.push(cameraValidation);
+
     /* exposure phase 	INCONGRUENT STIMULI INTERMEDIATE BINDING */
 var exposure = {
+  extensions: [
+    {
+        type: 'webgazer',
+        params: {
+            targets: ['.jspsych-content-wrapper']
+        }
+    }
+  ],
 		timeline: [
 			{
 				type: 'video-button-response',
-				sources: jsPsych.timelineVariable('video'),
+				stimulus: jsPsych.timelineVariable('video'),
 				width: 800,
 				choices: [],
 				data: jsPsych.timelineVariable('video'), /* Store the video name */
@@ -438,12 +530,53 @@ var exposure = {
          };
          timeline.push(postexposure_prepwait,postexposure_prepgo);
 	    
+         var cameraCalibrateInstructions = {
+          type: 'html-keyboard-response',
+          stimulus:`
+              <p>The following event will calibrate our eyetracking. Please focus on dots as they appear, and then left-click each one with your mouse.</p>
+              <p>Press any key to begin.</p>
+          `
+          }
+      
+          var cameraCalibrate = {
+              type: 'webgazer-calibrate',
+              calibration_points: [[25,50], [50,50], [75,50], [50,25], [50,75]],
+              calibration_mode: 'click'
+          }
+      
+          var cameraValidationInstructions = {
+            type: 'html-keyboard-response',
+            stimulus:`
+                <p>The following event will test the accuracy of our eye tracking. Please focus on the black dots as they appear.</p>
+                <p>Press any key to begin.</p>
+            `
+          }
+      
+          var cameraValidation = {
+              type: 'webgazer-validate',
+              validation_points: [[-200,-200], [-200,200], [200,-200], [200,200]],
+              validation_point_coordinates: 'center-offset-pixels',
+          }
+      
+          timeline.push(cameraCalibrateInstructions);
+          timeline.push(cameraCalibrate);
+          timeline.push(cameraValidationInstructions);
+          timeline.push(cameraValidation);
+
    /* post-exposure task */     
 var post_exposure = {
+    extensions: [
+      {
+          type: 'webgazer',
+          params: {
+              targets: ['.jspsych-content-wrapper']
+          }
+      }
+    ],
 		timeline: [
 			{
 				type: 'video-button-response',
-				sources: jsPsych.timelineVariable('video'),
+				stimulus: jsPsych.timelineVariable('video'),
 				width: 800,
 				choices: [],
 				data: jsPsych.timelineVariable('video'), /* Store the video name */
@@ -453,7 +586,7 @@ var post_exposure = {
 			},
 			{
 				type: 'video-button-response',
-				sources: [],
+				stimulus: [],
 				width: 800,
 				choices: jsPsych.timelineVariable('syllables'),
 				data: jsPsych.timelineVariable('syllables'), /* Store the answer choices on that trial */
@@ -510,7 +643,15 @@ var post_exposure = {
         on_trial_finish: session.insert, 
   		on_finish: function() {
       	window.top.location.href = `https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=144&credit_token=97e1a7b13d9e4e098133f23a76e40e04&survey_code=${survey_code}`	
-  		}
+  		},
+      extensions: [
+        {
+            type: 'webgazer', 
+            params: {
+                sampling_interval: 100,
+            }
+        }
+    ]
 	});
     }
 }
