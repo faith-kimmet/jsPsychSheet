@@ -92,6 +92,8 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /* ----------------------------------   Generic instructions    ---------------------------------------------------*/
+        
+        // ***ADD A DISCLAIMER ABOUT THE USE OF EYETRACKING*** 
 
         /* instructions pg 1  */
         let introInstructions = {
@@ -239,7 +241,9 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             ]
         };
         timeline.push(instructionsPg6);
-
+        
+        
+        // Need to update the compensation info for the new platform
         let compensationInfo = {
             type: 'html-keyboard-response',
             stimulus: function() {
@@ -263,7 +267,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         let instructionsPg7 = {
             type: 'html-keyboard-response',
             stimulus: function() {
-                return '<p>Before the experiment begins, we will conduct some practice trials.' +
+                return '<p> Before the experiment begins, we will conduct some practice trials.' +
                     'These trials are only for practice and your responses will not be recorded.</p>' +
                     jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
@@ -320,11 +324,9 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             repetitions: 0
         };
         timeline.push(practiceTrial);
-
-        /* define practice trial */
-        /* this needs to be edited to run like new experiment*/
-        // var practice_trial = {};
-
+        
+/* ----------------------------------------   END PRACTICE    ------------------------------------------------------ */
+        
         let instructionsPg8 = {
             type: 'html-keyboard-response',
             stimulus: function() {
@@ -346,17 +348,17 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////      EXPERIMENT FORMAT     /////////////////////////////////////////////////////
+//////////////////////////////////////////////      EXPERIMENT    /////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Stimuli bank
         /*
 
         congruentStimuli: [
-        { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', '--' ],1) },
+        { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', 'Ka' ],1) },
         { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
-        { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', '--', --', '--'],1) },
-        { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', '--', '--'],1) },
+        { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Da', 'Ka', 'Ta'],1) },
+        { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', 'Ga', 'Da'],1) },
         ]
 
         mcGurkStimuli: [
@@ -369,70 +371,12 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         incongruentStimuli: [
          { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', 'Ka', 'Ma'],1) },
          { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ka', 'Da'],1) },
-         { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', '--', '--'],1) },
-         { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', '--', '--'],1) }
+         { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', 'Ka', 'Na'],1) },
+         { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', 'Pa', 'Da'],1) }
         ]
 
         */
 
-        // Trial sequence
-            // TODO: Add an interval screen (?)
-        /*
-         var trialTimeline = {
-            timeline: [
-
-            // Show video
-            { type: 'video-button-response',
-            sources: jsPsych.timelineVariable('video'),
-            width: 800,
-            choices: [],
-            data: jsPsych.timelineVariable('video'),
-            trial_ends_after_video: true,
-                prompt: '<p></p>'
-            },
-
-            // Participant percept
-            { type: 'video-button-response',
-            sources: [],
-            width: 800,
-            choices: jsPsych.timelineVariable('syllables'),
-            data: jsPsych.timelineVariable('syllables'),
-            prompt: '<p>Which syllable did you perceive?</p>'
-            },
-
-            // Participant confidence
-            { type: 'html-slider-response',
-            stimulus: '<p>How confident are you in your answer?</p>',
-            labels: ['0','25','50','75','100'],
-            min: 0,
-            max: 100,
-            start: function(){
-                return jsPsych.randomization.sampleWithoutReplacement([10, 20, 30, 40, 50, 60, 70, 80, 90], 1)[0];},
-            step: 1,
-            prompt: "<p>Rate confidence from 0 (no confidence) to 100 (fully confident)</p>",
-            require_movement:true
-            }
-            ],
-
-            timeline_variables: [
-               // See stimuli bank
-            ],
-
-            randomize_order: true,
-            repetitions: 15
-        }
-
-        */
-
-        // Experimental sequence
-            // TODO: Add an interval screen (?)
-        /*
-            var experimentTimeline = {
-                timeline: [trialTimeline, interval],
-                randomize_order: true,
-                repetitions: 6
-                }
-         */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////      Congruent Exposure         ////////////////////////////////////////
@@ -472,10 +416,10 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 }
                 ],
             timeline_variables: [
-                { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', '--' ],1) },
+                { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', 'Ka' ],1) },
                 { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
-                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', '--', '--', '--'],1) },
-                { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', '--', '--'],1) }
+                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Da', 'Ka', 'Ta'],1) },
+                { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', 'Ga', 'Da'],1) },
                 ],
             randomize_order: true,
             repetitions: 15 //This may change
@@ -618,11 +562,11 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 }
             ],
             timeline_variables: [
-                { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', 'Ka', 'Ma'],1) },
-                { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ka', 'Da'],1) },
-                { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', '--', '--'],1) },
-                { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', '--', '--'],1) }
-            ],
+                 { video: ['resources/AuditoryNaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Da', 'Ka', 'Ma'],1) },
+                 { video: ['resources/AuditoryPaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ka', 'Da'],1) },
+                 { video: ['resources/AuditoryGaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Ta', 'Ka', 'Na'],1) },
+                 { video: ['resources/AuditoryTaVisualMa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ma', 'Pa', 'Da'],1) }
+                ],
             randomize_order: true,
             repetitions: 15 //This may change
         };
