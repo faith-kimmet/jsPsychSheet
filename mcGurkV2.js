@@ -520,7 +520,41 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             repetitions: 15 //This may change
         };
 
-        
+        let cameraCheck = {
+            timeline: [
+                {
+                    type: 'html-keyboard-response',
+                    stimulus: function() {
+                        return `<p>The following event will calibrate our eyetracking. Please focus on dots as they appear, and then left-click each one with your mouse.</p>
+                        ${jsPsych.timelineVariable('extra_instruction', true)}`
+                    },
+                    trial_duration: jsPsych.timelineVariable('trial_duration'),
+                    timeline: [{}],
+                    timeline_variables: CreateTrialDelay(2000)
+                },
+                {
+                    type: 'webgazer-calibrate',
+                    calibration_points: [[25,50], [50,50], [75,50], [50,25], [50,75]],
+                    calibration_mode: 'click'
+                },
+                {
+                    type: 'html-keyboard-response',
+                    stimulus: function() {
+                        return `<p>The following event will test the accuracy of our eye tracking. Please focus on the black dots as they appear.</p>
+                        ${jsPsych.timelineVariable('extra_instruction', true)}`
+                    },
+                    trial_duration: jsPsych.timelineVariable('trial_duration'),
+                    timeline: [{}],
+                    timeline_variables: CreateTrialDelay(2000)
+                },
+                {
+                    type: 'webgazer-validate',
+                    validation_points: [[-200,-200], [-200,200], [200,-200], [200,200]],
+                    validation_point_coordinates: 'center-offset-pixels',
+                }
+            ]
+        }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////      CLOSING         /////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -568,11 +602,14 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 instructionsPg8,
 
                 //Experiment
+                cameraCheck,
                 congruentTimeline,
                 endCongruentExposure,
+                cameraCheck,
                 startMcGurkExposure,
                 mcGurkTimeline,
                 endMcGurkExposure,
+                cameraCheck,
                 startNonBindingExposure,
                 nonBindingTimeline,
                 closingPage
