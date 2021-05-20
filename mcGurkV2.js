@@ -56,6 +56,21 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             timeline_variables: CreateTrialDelay(7500)
         };
 
+        // Alert user about the delay
+        let cameraWarning = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>There experiment will now try to access your camera. Please give it permissions to do so.</p>' +
+                       '<p>Remember, no data other than the location you are looking will be saved.</p>' +
+                       '<p>Please be patient because the camera may take a moment to start.</p>'
+                        jsPsych.timelineVariable('extra_instruction', true)
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: CreateTrialDelay(5000)
+        };
+
         var cameraInit = {
             type: 'webgazer-init-camera',
             instructions: `<p>The <b>ONLY</b> webcam data collected is the point on the screen you are looking at. No images or recordings will ever leave your computer.</p>
@@ -583,6 +598,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 welcome,
                 trial,
                 browser,
+                cameraWarning,
                 cameraInit,
                 survey,
                 sex,
