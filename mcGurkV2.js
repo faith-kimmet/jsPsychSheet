@@ -56,6 +56,13 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             timeline_variables: CreateTrialDelay(7500)
         };
 
+        let chinrest = {
+            type: "virtual-chinrest",
+            blindspot_reps: 3,
+            resize_units: "none",
+            pixels_per_unit: 50,
+        };
+
         // Alert user about the delay
         let cameraWarning = {
             type: 'html-keyboard-response',
@@ -618,13 +625,16 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 instructionsPg8,
 
                 //Experiment
+                chinrest,
                 cameraCheck,
                 congruentTimeline,
                 endCongruentExposure,
+                chinrest,
                 cameraCheck,
                 startMcGurkExposure,
                 mcGurkTimeline,
                 endMcGurkExposure,
+                chinrest,
                 cameraCheck,
                 startNonBindingExposure,
                 nonBindingTimeline,
