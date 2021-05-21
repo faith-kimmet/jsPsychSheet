@@ -238,20 +238,6 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             timeline_variables: CreateTrialDelay(5000)
         };
 
-        
-        let compensationInfo = {
-            type: 'html-keyboard-response',
-            stimulus: function() {
-                return ' Note: new platform => compensation method ' +
-                    ' abc ' +
-                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
-            },
-            choices: jsPsych.timelineVariable('choices'),
-            trial_duration: jsPsych.timelineVariable('trial_duration'),
-            timeline: [{}],
-            timeline_variables: CreateTrialDelay(1000)
-        };
-
 /* ----------------------------------------    PRACTICE    ------------------------------------------------------ */
 
         let instructionsPg7 = {
@@ -619,7 +605,6 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 instructionsPg4,
                 instructionsPg5,
                 instructionsPg6,
-                compensationInfo,
                 instructionsPg7,
                 practiceTrial,
                 instructionsPg8,
