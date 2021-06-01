@@ -21,7 +21,6 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         };
 
         // Participant consent
-        // NOTE: We're doing a new experiment, need to source new consent form
         // NOTE: deleting this chunk and the check_fn in the trial variable breaks the continue button
         var check_consent = function(elem) {
             if (document.getElementById('consent_checkbox').checked) {
@@ -46,14 +45,14 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             type: 'html-keyboard-response',
             stimulus: function() {
                 return '<p>Please complete this experiment using <strong>Google Chrome or Firefox</strong>. ' +
-                    'If you are not using Google Chrome or Firefox, please close the experiment and reopen it in a suggested ' +
-                    'browser.'+
+                    'If you are not using Google Chrome or Firefox, please close the experiment and ' +
+                    'reopen it in one of the suggested browsers.' + 
                     jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
             timeline: [{}],
-            timeline_variables: CreateTrialDelay(7500)
+            timeline_variables: CreateTrialDelay(5000)
         };
 
         let chinrest = {
@@ -64,12 +63,26 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         };
 
         // Alert user about the delay
-        let cameraWarning = {
+        let cameraWarning1 = {
             type: 'html-keyboard-response',
             stimulus: function() {
-                return '<p>There experiment will now try to access your camera. Please give it permissions to do so.</p>' +
-                       '<p>Remember, no data other than the location you are looking will be saved.</p>' +
-                       '<p>Please be patient because the camera may take a moment to start.</p>' +
+                return '<p> Soon, the experiment will request access to your camera. Please grant it permission when prompted.</p>' +
+                       '<p>The <b>only</b> webcam data collected will be the region of the screen you are looking at.</p>' +
+                       '<p>Neither images nor recordings will be collected.</p>' +
+                        jsPsych.timelineVariable('extra_instruction', true)
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: CreateTrialDelay(5000)
+        };
+        
+        let cameraWarning2 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>Once granting webcam access, please allow a few minutes for the experiment to load.</p>' +
+                       '<p>Please do <b>NOT</b> refresh or exit the experiment while it is waiting, as this will reset ' +
+                       'your progress to the starting page.</p>' +
                         jsPsych.timelineVariable('extra_instruction', true)
             },
             choices: jsPsych.timelineVariable('choices'),
@@ -80,11 +93,11 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
         var cameraInit = {
             type: 'webgazer-init-camera',
-            instructions: `<p>The <b>ONLY</b> webcam data collected is the point on the screen you are looking at. No images or recordings will ever leave your computer.</p>
-            <p>Position your head so that the webcam has a good view of your eyes.</p>
-            <p>Use the video in the upper-left corner as a guide. Center your face in the box and look directly towards the camera.</p>
-            <p>It is important that you try and keep your head reasonably still throughout the experiment, so please take a moment to adjust your setup as needed.</p>
-            <p>When your face is centered in the box and the box turns green, you can click to continue.</p>`
+            instructions: `<p>Using the video in the upper-left corner as a guide, please center your face in the box and position your head so that the webcam has a clear image of your eyes. </p>
+            <p>It is very important that you carefully maintain this position for the duration of the experiment, so please take a moment to adjust your setup as needed.</p>
+            <p>When ready, move your face to the center of the box and look directly towards the camera.</p>
+            <p>When your face is properly positioned, the box will turn green and you can click the button below to continue.</p>
+            <p>Reminder: the <b>ONLY</b> webcam data collected is the point on the screen you are looking at. No images or recordings will ever leave your computer.</p>`
         };
     
         // Participant age
@@ -115,14 +128,14 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
 /* ----------------------------------   Generic instructions    ---------------------------------------------------*/
         
-        // ***ADD A DISCLAIMER ABOUT THE USE OF EYETRACKING*** 
+        
 
         /* instructions pg 1  */
         let introInstructions = {
             type: 'html-keyboard-response',
             stimulus: function() {
                 return '<p>Thank you for your participation in this experiment. ' +
-                ' Please read the instructions entirely before beginning.</p>' +
+                ' Please read the instructions entirely before you begin.</p>' +
                 jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
             choices: jsPsych.timelineVariable('choices'),
@@ -135,14 +148,15 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         let soundCheckInstructions = {
             type: 'html-keyboard-response',
             stimulus: function() {
-                return '<p>For the duration of the experiment, please use headphones or turn your speakers to a comfortable volume.' +
-                    'Please use the following screen as an opportunity to check your audio settings and adjust as necessary.</p>' +
+                return '<p>For the duration of the experiment, please use headphones or turn your speakers ' +
+                       'up to a comfortable volume. Please use the following screen as an opportunity ' +
+                       'to check your audio settings and adjust the sound as necessary.</p> ' +
                     jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
             timeline: [{}],
-            timeline_variables: CreateTrialDelay(3000)
+            timeline_variables: CreateTrialDelay(5000)
         };
 
         /* sound check screen */
@@ -170,17 +184,19 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         var instructions_p3wait = {
             type: "image-keyboard-response",
             stimulus: "resources/arm.png",
-            prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance from your computer " +
-                "screen, as illustrated above. Additionally, please focus your attention to the center of your screen.</p>",
+            prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance " +
+                    "from your computer screen, as illustrated above. Additionally, please focus your " +
+                    "attention to the center of your screen.</p>",
             choices: jsPsych.NO_KEYS,
             trial_duration: 7500,
         };
         var instructions_p3go = {
             type: "image-keyboard-response",
             stimulus: "resources/arm.png",
-            prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance from your computer " +
-                "screen, as illustrated above. Your attention should also be focused on the center of your screen.</p>" +
-                "<p> Once you have done so, press any key to continue.</p>",
+            prompt: "<p>Throughout the duration of the experiment, please sit at an arm's distance " +
+                    "from your computer screen, as illustrated above. Additionally, please focus your " +
+                    "attention to the center of your screen.</p>" +
+                    "<p> Once you have done so, press any key to continue.</p>",
         };
 
 
@@ -197,7 +213,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
             timeline: [{}],
-            timeline_variables: CreateTrialDelay(4000)
+            timeline_variables: CreateTrialDelay(3000)
         };
 
         let instructionsPg4 = {
@@ -222,7 +238,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
             timeline: [{}],
-            timeline_variables: CreateTrialDelay(4000)
+            timeline_variables: CreateTrialDelay(3000)
         };
 
         let instructionsPg6 = {
@@ -235,7 +251,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
             timeline: [{}],
-            timeline_variables: CreateTrialDelay(5000)
+            timeline_variables: CreateTrialDelay(4000)
         };
 
 /* ----------------------------------------    PRACTICE    ------------------------------------------------------ */
@@ -347,7 +363,19 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////      Congruent Exposure         ////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        
+         let beginExp1 = {
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                return '<p>Press any key to begin.' +                    
+                    jsPsych.timelineVariable('extra_instruction', false)+'</p>'
+            },
+            choices: jsPsych.timelineVariable('choices'),
+            trial_duration: jsPsych.timelineVariable('trial_duration'),
+            timeline: [{}],
+            timeline_variables: CreateTrialDelay(500)
+        };
+        
         var congruentTimeline = {
             timeline: [
                 {   // Show video
@@ -591,7 +619,8 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 welcome,
                 trial,
                 browser,
-                cameraWarning,
+                cameraWarning1,
+                cameraWarning2,
                 //cameraInit, DEMO
                 survey,
                 sex,
@@ -608,6 +637,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 instructionsPg7,
                 practiceTrial,
                 instructionsPg8,
+                beginExp1,
 
                 //Experiment
                 chinrest,
