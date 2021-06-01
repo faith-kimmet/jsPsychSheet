@@ -592,7 +592,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 trial,
                 browser,
                 cameraWarning,
-                cameraInit,
+                //cameraInit, DEMO
                 survey,
                 sex,
                 introInstructions,
@@ -611,16 +611,16 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
                 //Experiment
                 chinrest,
-                cameraCheck,
+                //cameraCheck,  DEMO
                 congruentTimeline,
                 endCongruentExposure,
                 chinrest,
-                cameraCheck,
+                //cameraCheck,  DEMO
                 startMcGurkExposure,
                 mcGurkTimeline,
                 endMcGurkExposure,
                 chinrest,
-                cameraCheck,
+                //cameraCheck,  DEMO
                 startNonBindingExposure,
                 nonBindingTimeline,
                 closingPage
