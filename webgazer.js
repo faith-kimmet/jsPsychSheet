@@ -86074,6 +86074,7 @@ var regression = __webpack_require__(80);
 // CONCATENATED MODULE: ./src/params.mjs
 const params = {
   moveTickSize: 50,
+  videoContainerId: 'webgazerVideoContainer',
   videoElementId: 'webgazerVideoFeed',
   videoElementCanvasId: 'webgazerVideoCanvas',
   faceOverlayId: 'webgazerFaceOverlay',
@@ -87597,14 +87598,14 @@ var ridgeRegThreaded_trailDataWindow = 10;
  * this object allow to perform threaded ridge regression
  * @constructor
  */
-ridgeRegThreaded_reg.RidgeRegThreaded = function() {
-    this.init();
+ridgeRegThreaded_reg.RidgeRegThreaded = function(workerScriptURL) {
+    this.init(workerScriptURL);
 };
 
 /**
  * Initialize new arrays and initialize Kalman filter.
  */
-ridgeRegThreaded_reg.RidgeRegThreaded.prototype.init = function() {
+ridgeRegThreaded_reg.RidgeRegThreaded.prototype.init = function(workerScriptURL) {
     this.screenXClicksArray = new src_util.DataWindow(ridgeRegThreaded_dataWindow);
     this.screenYClicksArray = new src_util.DataWindow(ridgeRegThreaded_dataWindow);
     this.eyeFeaturesClicks = new src_util.DataWindow(ridgeRegThreaded_dataWindow);
@@ -87618,7 +87619,8 @@ ridgeRegThreaded_reg.RidgeRegThreaded.prototype.init = function() {
 
     // Place the src/ridgeworker.js file into the same directory as your html file.
     if (!this.worker) {
-        this.worker = new Worker('ridgeWorker.mjs'); // [20200708] TODO: Figure out how to make this inline
+        //this.worker = new Worker('ridgeWorker.mjs'); // [20200708] TODO: Figure out how to make this inline
+        this.worker = new Worker(workerScriptURL);
         this.worker.onerror = function(err) { console.log(err.message); };
         this.worker.onmessage = function(evt) {
             weights.X = evt.data.X;
@@ -87774,11 +87776,13 @@ src_webgazer.reg.RidgeWeightedReg = ridgeWeightedReg.RidgeWeightedReg;
 src_webgazer.reg.RidgeRegThreaded = ridgeRegThreaded.RidgeRegThreaded;
 src_webgazer.util = src_util;
 src_webgazer.params = src_params;
+src_webgazer.workerScriptURL = 'ridgeWorker.mjs';
 
 //PRIVATE VARIABLES
 
 //video elements
 var videoStream = null;
+var videoContainerElement = null;
 var videoElement = null;
 var videoElementCanvas = null;
 var faceOverlay = null;
@@ -87821,7 +87825,7 @@ var curTrackerMap = {
 var regressionMap = {
   'ridge': function() { return new src_webgazer.reg.RidgeReg(); },
   'weightedRidge': function() { return new src_webgazer.reg.RidgeWeightedReg(); },
-  'threadedRidge': function() { return new src_webgazer.reg.RidgeRegThreaded(); },
+  'threadedRidge': function() { return new src_webgazer.reg.RidgeRegThreaded(src_webgazer.workerScriptURL); },
 };
 
 //localstorage name
@@ -87834,7 +87838,6 @@ var defaults = {
   'data': [],
   'settings': {}
 };
-
 
 //PRIVATE FUNCTIONS
 
@@ -87985,6 +87988,13 @@ function paintCurrentFrame(canvas, width, height) {
  * @returns {*}
  */
 async function getPrediction(regModelIndex) {
+  // this allows getPrediction to work even when webgazer is paused, since the only necessary
+  // component for getPrediction in loop() is paintCurrentFrame().
+  if(paused){
+    paintCurrentFrame(videoElementCanvas, videoElementCanvas.width, videoElementCanvas.height);
+  }
+  var time = performance.now();
+
   var predictions = [];
   // [20200617 xk] TODO: this call should be made async somehow. will take some work.
   latestEyeFeatures = await getPupilFeatures(videoElementCanvas, videoElementCanvas.width, videoElementCanvas.height);
@@ -88000,14 +88010,16 @@ async function getPrediction(regModelIndex) {
     return predictions[regModelIndex] === null ? null : {
       'x' : predictions[regModelIndex].x,
       'y' : predictions[regModelIndex].y,
-      'eyeFeatures': latestEyeFeatures
+      'eyeFeatures': latestEyeFeatures,
+      't' : time
     };
   } else {
     return predictions.length === 0 || predictions[0] === null ? null : {
       'x' : predictions[0].x,
       'y' : predictions[0].y,
       'eyeFeatures': latestEyeFeatures,
-      'all' : predictions
+      'all' : predictions,
+      't' : time
     };
   }
 }
@@ -88234,15 +88246,23 @@ async function init(stream) {
   // used for webgazer.stopVideo() and webgazer.setCameraConstraints()
   videoStream = stream;
 
+  // create a video element container to enable customizable placement on the page
+  videoContainerElement = document.createElement('div');
+  videoContainerElement.id = src_webgazer.params.videoContainerId;
+  videoContainerElement.style.display = src_webgazer.params.showVideo ? 'block' : 'none';
+  videoContainerElement.style.position = 'fixed';
+  videoContainerElement.style.top = topDist;
+  videoContainerElement.style.left = leftDist;
+  videoContainerElement.style.width = src_webgazer.params.videoViewerWidth + 'px';
+  videoContainerElement.style.height = src_webgazer.params.videoViewerHeight + 'px';
+  
   videoElement = document.createElement('video');
   videoElement.setAttribute('playsinline', '');
   videoElement.id = src_webgazer.params.videoElementId;
   videoElement.srcObject = stream;
   videoElement.autoplay = true;
   videoElement.style.display = src_webgazer.params.showVideo ? 'block' : 'none';
-  videoElement.style.position = 'fixed';
-  videoElement.style.top = topDist;
-  videoElement.style.left = leftDist;
+  videoElement.style.position = 'absolute';
   // We set these to stop the video appearing too large when it is added for the very first time
   videoElement.style.width = src_webgazer.params.videoViewerWidth + 'px';
   videoElement.style.height = src_webgazer.params.videoViewerHeight + 'px';
@@ -88258,9 +88278,7 @@ async function init(stream) {
   faceOverlay = document.createElement('canvas');
   faceOverlay.id = src_webgazer.params.faceOverlayId;
   faceOverlay.style.display = src_webgazer.params.showFaceOverlay ? 'block' : 'none';
-  faceOverlay.style.position = 'fixed';
-  faceOverlay.style.top = topDist;
-  faceOverlay.style.left = leftDist;
+  faceOverlay.style.position = 'absolute';
 
   // Mirror video feed
   if (src_webgazer.params.mirrorVideo) {
@@ -88281,8 +88299,8 @@ async function init(stream) {
   faceFeedbackBox = document.createElement('canvas');
   faceFeedbackBox.id = src_webgazer.params.faceFeedbackBoxId;
   faceFeedbackBox.style.display = src_webgazer.params.showFaceFeedbackBox ? 'block' : 'none';
-  faceFeedbackBox.style.position = 'fixed';
   faceFeedbackBox.style.border = 'solid';
+  faceFeedbackBox.style.position = 'absolute';
 
   // Gaze dot
   // Starts offscreen
@@ -88300,16 +88318,17 @@ async function init(stream) {
   gazeDot.style.height = '10px';
 
   // Add other preview/feedback elements to the screen once the video has shown and its parameters are initialized
-  document.body.appendChild(videoElement);
+  videoContainerElement.appendChild(videoElement);
+  document.body.appendChild(videoContainerElement);
   function setupPreviewVideo(e) {
 
     // All video preview parts have now been added, so set the size both internally and in the preview window.
     setInternalVideoBufferSizes( videoElement.videoWidth, videoElement.videoHeight );
     src_webgazer.setVideoViewerSize( src_webgazer.params.videoViewerWidth, src_webgazer.params.videoViewerHeight );
 
-    document.body.appendChild(videoElementCanvas);
-    document.body.appendChild(faceOverlay);
-    document.body.appendChild(faceFeedbackBox);
+    videoContainerElement.appendChild(videoElementCanvas);
+    videoContainerElement.appendChild(faceOverlay);
+    videoContainerElement.appendChild(faceFeedbackBox);
     document.body.appendChild(gazeDot);
 
     // Run this only once, so remove the event listener
@@ -88514,6 +88533,9 @@ src_webgazer.showVideo = function(val) {
   src_webgazer.params.showVideo = val;
   if(videoElement) {
     videoElement.style.display = val ? 'block' : 'none';
+  }
+  if(videoContainerElement) {
+    videoContainerElement.style.display = val ? 'block' : 'none';
   }
   return src_webgazer;
 };

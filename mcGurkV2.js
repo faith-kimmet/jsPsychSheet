@@ -1,5 +1,6 @@
-function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
-    jsSheetHandle.CreateSession(RunExperiment)
+function ExampleExperiment(jsSheetHandle, jsPsychHandle, experimentCodes) {
+    const sessionBuilder = new SessionBuilder();
+    sessionBuilder.createSession(RunExperiment);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////      SET UP         /////////////////////////////////////////////////////
@@ -13,6 +14,7 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
         // Record the condition assignment in the jsPsych data
         // Adds "subject" and "condition" properties to each trial
         jsPsych.data.addProperties({subject: subjectID, condition: subjectCondition});
+        jsPsych.data.addProperties(experimentCodes);
 
         // Welcome message
         var welcome = {
@@ -641,28 +643,29 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
 
                 //Experiment
                 chinrest,
-                //cameraCheck,  DEMO
+                cameraCheck,
                 congruentTimeline,
                 endCongruentExposure,
                 chinrest,
-                //cameraCheck,  DEMO
+                cameraCheck,
                 startMcGurkExposure,
                 mcGurkTimeline,
                 endMcGurkExposure,
                 chinrest,
-                //cameraCheck,  DEMO
+                cameraCheck,
                 startNonBindingExposure,
                 nonBindingTimeline,
                 closingPage
             ],
             show_progress_bar: true,
-            on_trial_finish: session.insert,
-            on_finish: function() {
-                window.top.location.href = `https://ufl.sona-systems.com/webstudy_credit.aspx?experiment_id=144&credit_token=97e1a7b13d9e4e098133f23a76e40e04&survey_code=${survey_code}`
+            on_trial_finish: function(data) {
+                session.processWebgazerData(data, WEBGAZER_TARGET_CSS_ID);
+                session.insert(data);
             },
-            extensions: [
-                WebGazerExtension(100)
-            ]
+            on_finish: function() {
+                window.top.location.href = 'https://app.prolific.co/submissions/complete?cc=10770AE6'
+            },
+            extensions: [{ type: 'webgazer' }]
         });
     }
 
@@ -679,14 +682,5 @@ function ExampleExperiment(jsSheetHandle, jsPsychHandle, survey_code) {
                 extra_instruction: '<p>Press any key to continue.</p>'
             }
         ]
-    }
-
-    function WebGazerExtension(sampleRate) {
-        return {
-            type: 'webgazer', 
-            params: {
-                sampling_interval: sampleRate,
-            }
-        }
     }
 }

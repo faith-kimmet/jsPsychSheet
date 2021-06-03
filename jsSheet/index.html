@@ -30,7 +30,7 @@
         <link href="jspsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 
         <!-- jsSheet -->
-        <script src="jsSheet/jsSheet.js"></script>
+        <script src="jsSheet/Session.js"></script>
 
         <!-- Experiment Files -->
         <script type="text/javascript" src="webgazer.js"></script>
@@ -38,7 +38,7 @@
         <script src="mcGurkV2.js"></script>
 
         <script>
-            ExampleExperiment(jsSheet, jsPsych, <?= survey_code ?>)
+            ExampleExperiment(jsSheet, jsPsych, {PROLIFIC_PID: <?= PROLIFIC_PID ?>, STUDY_ID: <?= STUDY_ID ?>, SESSION_ID: <?= SESSION_ID ?>});
         </script>
     </head>
     <body>
