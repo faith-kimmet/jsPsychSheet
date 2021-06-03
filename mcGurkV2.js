@@ -1,4 +1,4 @@
-function ExampleExperiment(jsSheetHandle, jsPsychHandle, experimentCodes) {
+function ExampleExperiment(jsPsychHandle, experimentCodes) {
     const sessionBuilder = new SessionBuilder();
     sessionBuilder.createSession(RunExperiment);
 
