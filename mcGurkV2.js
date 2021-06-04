@@ -596,9 +596,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     timeline_variables: CreateTrialDelay(2000)
                 },
                 {
-                    type: 'webgazer-calibrate',
-                    calibration_points: [[25,50], [50,50], [75,50], [50,25], [50,75]],
-                    calibration_mode: 'click'
+                    type: 'webgazer-calibrate'
                 },
                 {
                     type: 'html-keyboard-response',
@@ -611,9 +609,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     timeline_variables: CreateTrialDelay(2000)
                 },
                 {
-                    type: 'webgazer-validate',
-                    validation_points: [[-200,-200], [-200,200], [200,-200], [200,200]],
-                    validation_point_coordinates: 'center-offset-pixels',
+                    type: 'webgazer-validate'
                 }
             ]
         }
