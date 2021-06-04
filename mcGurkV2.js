@@ -622,10 +622,8 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
         let closingPage = {
             type: 'html-keyboard-response',
             stimulus: function() {
-                return ' <p>This now concludes the experiment. <strong> ' +
-                    'Please do not close the experiment until your responses have been confirmed as recorded.' +
-                    '</strong> Press the right arrow key to be credited.</p> ' +
-                    jsPsych.timelineVariable('extra_instruction', true)+'</p>'
+                return ' <p>This now concludes the experiment. <strong> '+
+                    jsPsych.timelineVariable('extra_instruction', true)
             },
             choices: jsPsych.timelineVariable('choices'),
             trial_duration: jsPsych.timelineVariable('trial_duration'),
