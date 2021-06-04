@@ -10,30 +10,41 @@ class SessionBuilder {
   
     createGoogleSession(onSuccess = console.log, onFailure = console.error) {
       const sessionInsert = this.insert;
-      const sessionProcessWebgazerData = this.processWebgazerData;
       this.getSessionId(function(id) {
-        onSuccess(new Session(id, sessionInsert, sessionProcessWebgazerData))
+        onSuccess(new Session(id, sessionInsert))
       }, onFailure);
     }
   
     createDebugSession(onSuccess = console.log, onFailure = console.error) {
       console.log("Running debug session");
       const debugSessionId = -1;
-      const debugInsertFunction = (data) => {
-        console.log(JSON.parse(JSON.stringify(data)));
+      const debugInsertFunction = (id, data) => {
+        console.log(data);
       }
-      onSuccess(new Session(debugSessionId, debugInsertFunction, this.processWebgazerData));
+      onSuccess(new Session(debugSessionId, debugInsertFunction));
     }
   
     getSessionId(onSuccess, onFailure) {
       google.script.run.withFailureHandler(onFailure).withSuccessHandler(onSuccess).GetSessionID()
     }
-  
-    insert = (id, data, onSuccess, onFailure) => {
+
+    insert(id, data, onSuccess, onFailure) {
       google.script.run.withFailureHandler(onFailure).withSuccessHandler(onSuccess).Insert(id, data)
     }
+  }
   
-    processWebgazerData = (data, target) => {
+  class Session {
+    id
+    insert
+
+    constructor(id, insert) {
+      this.id = id;
+      this.insert = (data) => {
+        insert(id, data);
+      }
+    }
+
+    processWebgazerData(data, target) {
       if (!data.webgazer_data) {
         return;
       }
@@ -63,18 +74,15 @@ class SessionBuilder {
       delete data.webgazer_data;
       delete data.webgazer_targets;
     }
-  }
-  
-  class Session {
-    id
-    insert
-    processWebgazerData
-  
-    constructor(id, insert, processWebgazerData) {
-      this.id = id;
-      this.insert = data => {
-        insert(id, data, () => {}, console.error);
+
+    processValidationData(data) {
+      if (!data.raw_gaze) {
+        return;
       }
-      this.processWebgazerData = processWebgazerData;
+      delete data.raw_gaze;
+      for (let key in data) {
+        if (Array.isArray(data[key]))
+          data[key] = JSON.stringify(data[key]);
+      }
     }
   }

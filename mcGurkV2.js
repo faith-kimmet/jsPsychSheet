@@ -658,7 +658,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                 instructionsPg7,
                 practiceTrial,
                 instructionsPg8,
-                beginExp1,
+                //beginExp1,
 
                 //Experiment
                 chinrest,
@@ -679,6 +679,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             show_progress_bar: true,
             on_trial_finish: function(data) {
                 session.processWebgazerData(data, WEBGAZER_TARGET_CSS_ID);
+                session.processValidationData(data);
                 session.insert(data);
             },
             on_finish: function() {
