@@ -263,7 +263,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             type: 'html-keyboard-response',
             stimulus: function() {
                 return '<p> Before the experiment begins, we will conduct some practice trials.' +
-                    'These trials are only for practice and your responses will not be recorded.</p>' +
+                    ' These trials are only for practice and your responses will not be recorded.</p>' +
                     jsPsych.timelineVariable('extra_instruction', true)+'</p>'
             },
             choices: jsPsych.timelineVariable('choices'),
