@@ -10,7 +10,8 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
         // Generate a random subject ID (6 characters)
         var subjectID = jsPsych.randomization.randomID(6);
         var subjectCondition = null; /* change this later depending on what condition participants are assigned to */
-
+        const WEBGAZER_TARGET_CSS_ID = '#jspsych-video-button-response-stimulus';
+        
         // Record the condition assignment in the jsPsych data
         // Adds "subject" and "condition" properties to each trial
         jsPsych.data.addProperties({subject: subjectID, condition: subjectCondition});
@@ -387,7 +388,15 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     choices: [],
                     data: jsPsych.timelineVariable('video'), /* Store the video name */
                     trial_ends_after_video: true,
-                    prompt: '<p></p>'
+                    prompt: '<p></p>',
+                    extensions: [
+                        {
+                            type: 'webgazer',
+                            params: {
+                                targets: [WEBGAZER_TARGET_CSS_ID]
+                            }
+                        }
+                    ],
                 },
                 {   // Collect participant's percept
                     type: 'video-button-response',
@@ -456,7 +465,15 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     choices: [],
                     data: jsPsych.timelineVariable('video'), /* Store the video name */
                     trial_ends_after_video: true,
-                    prompt: '<p></p>'
+                    prompt: '<p></p>',
+                    extensions: [
+                        {
+                            type: 'webgazer',
+                            params: {
+                                targets: [WEBGAZER_TARGET_CSS_ID]
+                            }
+                        }
+                    ],
                 },
                 {   // Collect participant's percept
                     type: 'video-button-response',
@@ -523,7 +540,15 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     choices: [],
                     data: jsPsych.timelineVariable('video'), /* Store the video name */
                     trial_ends_after_video: true,
-                    prompt: '<p></p>'
+                    prompt: '<p></p>',
+                    extensions: [
+                        {
+                            type: 'webgazer',
+                            params: {
+                                targets: [WEBGAZER_TARGET_CSS_ID]
+                            }
+                        }
+                    ],
                 },
                 {   // Collect participant's percept
                     type: 'video-button-response',
