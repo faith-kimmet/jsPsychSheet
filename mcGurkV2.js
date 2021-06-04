@@ -648,7 +648,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                 browser,
                 cameraWarning1,
                 cameraWarning2,
-                //cameraInit, DEMO
+                cameraInit,
                 survey,
                 sex,
                 introInstructions,
