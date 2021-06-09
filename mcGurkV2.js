@@ -614,7 +614,12 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                     timeline_variables: CreateTrialDelay(2000)
                 },
                 {
-                    type: 'webgazer-validate'
+                    type: 'webgazer-validate',
+                    validation_points: [
+                        [20,10], [20,50], [20,90],
+                        [50,10], [50,50], [50,90],
+                        [80,10], [80,50], [80,90]
+                    ]
                 }
             ]
         }
