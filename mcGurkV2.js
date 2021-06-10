@@ -23,6 +23,11 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             stimulus: "Welcome to the experiment- thank you for your participation. Press any key to begin."
         };
 
+        var previd_delay = {
+            type: "html-keyboard-response",
+            stimulus: "Press any key to begin experiment."
+        };
+        
         // Participant consent
         // NOTE: deleting this chunk and the check_fn in the trial variable breaks the continue button
         var check_consent = function(elem) {
@@ -697,15 +702,18 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
                 //Experiment
                 chinrest,
                 cameraCheck,
+                previd_delay,
                 congruentTimeline,
                 endCongruentExposure,
                 chinrest,
                 cameraCheck,
+                previd_delay,
                 startMcGurkExposure,
                 mcGurkTimeline,
                 endMcGurkExposure,
                 chinrest,
                 cameraCheck,
+                previd_delay,
                 startNonBindingExposure,
                 nonBindingTimeline,
                 closingPage
