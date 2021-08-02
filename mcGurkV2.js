@@ -429,7 +429,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             timeline_variables: [
                 { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', 'Ka' ],1) },
                 { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
-                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Da', 'Ka', 'Ta'],1) },
+                { video: ['resources/AuditoryDaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Da', 'Ga', 'Ka', 'Ta'],1) },
                 { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', 'Ga', 'Da'],1) },
                 { video: ['resources/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma', 'Ta', 'Na', 'La'],1) },
                 { video: ['resources/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba', 'Ta', 'Pa', 'Da'],1) },
@@ -514,7 +514,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             timeline_variables: [
                 { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', 'Ka' ],1) },
                 { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
-                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Da', 'Ka', 'Ta'],1) },
+                { video: ['resources/AuditoryDaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Da', 'Ga', 'Ka', 'Ta'],1) },
                 { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', 'Ga', 'Da'],1) },
                 { video: ['resources/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma', 'Ta', 'Na', 'La'],1) },
                 { video: ['resources/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba', 'Ta', 'Pa', 'Da'],1) },
@@ -597,7 +597,7 @@ function ExampleExperiment(jsPsychHandle, experimentCodes) {
             timeline_variables: [
                 { video: ['resources/AuditoryNaVisualNa.mp4'], syllables: jsPsych.randomization.repeat(['Na', 'Ma', 'La', 'Ka' ],1) },
                 { video: ['resources/AuditoryPaVisualPa.mp4'], syllables: jsPsych.randomization.repeat(['Pa', 'Ta', 'Ga', 'Ba'],1) },
-                { video: ['resources/AuditoryGaVisualGa.mp4'], syllables: jsPsych.randomization.repeat(['Ga', 'Da', 'Ka', 'Ta'],1) },
+                { video: ['resources/AuditoryDaVisualDa.mp4'], syllables: jsPsych.randomization.repeat(['Da', 'Ga', 'Ka', 'Ta'],1) },
                 { video: ['resources/AuditoryTaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ta', 'Ka', 'Ga', 'Da'],1) },
                 { video: ['resources/AuditoryMaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ma', 'Ta', 'Na', 'La'],1) },
                 { video: ['resources/AuditoryBaVisualTa.mp4'], syllables: jsPsych.randomization.repeat(['Ba', 'Ta', 'Pa', 'Da'],1) },
